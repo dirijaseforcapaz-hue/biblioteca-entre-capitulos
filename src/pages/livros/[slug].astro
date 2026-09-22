@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ChapterCard from '../../components/ChapterCard.astro';
 
 export async function getStaticPaths() {
   const books = await getCollection('livros');
@@ -13,6 +12,9 @@ const { Content } = await render(book);
 const chapters = (await getCollection('capitulos'))
   .filter((chapter) => chapter.data.bookSlug === book.data.slug)
   .sort((a, b) => a.data.number - b.data.number);
+const byNumber = new Map(chapters.map((chapter) => [chapter.data.number, chapter]));
+const firstChapter = chapters[0];
+const progress = Math.min(100, Math.round((chapters.length / book.data.totalChapters) * 100));
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -23,36 +25,77 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={book.data.title} description={book.data.description} jsonLd={jsonLd}>
-  <section class="book-hero">
+  <section class="book-hero book-hero-v2">
     <div class="container">
       <div class="breadcrumbs"><a href="/">Início</a><span>›</span><a href="/livros">Livros</a><span>›</span><span>{book.data.title}</span></div>
       <div class="book-hero-grid">
-        <div class="book-cover-large"><img src={book.data.cover} alt={`Capa editorial da coleção ${book.data.title}`} width="560" height="760" /></div>
-        <div>
+        <div class="book-cover-stage">
+          <div class="book-cover-large"><img src={book.data.cover} alt={`Capa de ${book.data.title}, de ${book.data.author}`} width="560" height="760" /></div>
+          <span class="cover-shadow" aria-hidden="true"></span>
+        </div>
+        <div class="book-hero-copy">
           <p class="eyebrow">{book.data.category}</p>
           <h1>{book.data.title}</h1>
+          <p class="book-byline">por <strong>{book.data.author}</strong></p>
           <p class="book-description">{book.data.description}</p>
-          <div class="book-meta">
-            <span class="badge">Autor: {book.data.author}</span>
-            <span class="badge">{chapters.length} {chapters.length === 1 ? 'capítulo disponível' : 'capítulos disponíveis'}</span>
+
+          <div class="book-progress-panel">
+            <div class="book-progress-top"><span>Coleção em andamento</span><strong>{chapters.length} de {book.data.totalChapters} capítulos</strong></div>
+            <div class="collection-progress-track large"><span style={`width:${progress}%`}></span></div>
           </div>
-          <div class="article-body" style="margin-top: 28px;"><Content /></div>
+
+          <div class="book-hero-actions">
+            {firstChapter && <a class="btn btn-primary" href={`/${firstChapter.data.bookSlug}/${firstChapter.data.slug}`} data-track="iniciar_colecao" data-track-label={book.data.title}>Começar a leitura <span aria-hidden="true">→</span></a>}
+            {book.data.affiliateUrl && <a class="btn btn-secondary" href={book.data.affiliateUrl} target="_blank" rel="sponsored noopener" data-track="amazon_clicado" data-track-label={book.data.title}>{book.data.affiliateLabel} ↗</a>}
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" style="background: rgba(255,255,255,.28); border-block:1px solid var(--line);">
+  <section class="book-about-section">
+    <div class="container book-about-grid">
+      <div><p class="eyebrow">Sobre esta coleção</p><h2>Uma leitura para consultar, não apenas consumir.</h2></div>
+      <div class="article-body book-intro"><Content /></div>
+    </div>
+  </section>
+
+  <section class="section chapter-roadmap-section">
     <div class="container">
-      <div class="section-heading">
-        <div><p class="eyebrow">Leitura guiada</p><h2>Capítulos disponíveis</h2></div>
-        <p class="muted">A coleção cresce conforme os episódios e materiais visuais são publicados.</p>
+      <div class="section-heading split-heading">
+        <div><p class="eyebrow">Roteiro do livro</p><h2>Capítulo por capítulo.</h2></div>
+        <p class="muted section-intro">Os capítulos publicados ficam disponíveis para leitura; os próximos aparecem no roteiro para mostrar como a coleção será construída.</p>
       </div>
-      {chapters.length ? (
-        <div class="grid-3">
-          {chapters.map((chapter) => <ChapterCard number={chapter.data.number} title={chapter.data.title} summary={chapter.data.summary} bookSlug={chapter.data.bookSlug} slug={chapter.data.slug} />)}
-        </div>
-      ) : <div class="empty-state">Os capítulos desta coleção estão em produção.</div>}
+
+      <div class="chapter-roadmap">
+        {book.data.chapterOutline.map((item) => {
+          const chapter = byNumber.get(item.number);
+          return chapter ? (
+            <a class="roadmap-item is-published" href={`/${chapter.data.bookSlug}/${chapter.data.slug}`} data-track="capitulo_aberto" data-track-label={chapter.data.title}>
+              <span class="roadmap-number">{String(item.number).padStart(2, '0')}</span>
+              <span class="roadmap-main"><small>Disponível</small><strong>{item.title}</strong><span>{chapter.data.kicker}</span></span>
+              <span class="roadmap-action">Ler <b aria-hidden="true">→</b></span>
+            </a>
+          ) : (
+            <div class="roadmap-item is-upcoming">
+              <span class="roadmap-number">{String(item.number).padStart(2, '0')}</span>
+              <span class="roadmap-main"><small>Em preparação</small><strong>{item.title}</strong></span>
+              <span class="roadmap-action">Em breve</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="book-method-section">
+    <div class="container book-method-grid">
+      <div><p class="eyebrow">Método Entre Capítulos</p><h2>Leia. Conecte. Revise.</h2></div>
+      <div class="method-steps">
+        <div><span>01</span><strong>Análise</strong><p>Entenda a ideia e sua função dentro do capítulo.</p></div>
+        <div><span>02</span><strong>Conexões</strong><p>Veja como o conceito conversa com o restante da obra.</p></div>
+        <div><span>03</span><strong>Mapa</strong><p>Retorne à síntese visual quando quiser revisar rapidamente.</p></div>
+      </div>
     </div>
   </section>
 </BaseLayout>

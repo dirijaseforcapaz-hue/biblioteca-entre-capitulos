@@ -12,5 +12,5 @@ const { number, title, summary, bookSlug, slug } = Astro.props;
   <span class="chapter-number">Capítulo {String(number).padStart(2, '0')}</span>
   <h3><a href={`/${bookSlug}/${slug}`}>{title}</a></h3>
   <p>{summary}</p>
-  <a href={`/${bookSlug}/${slug}`} data-track="capitulo_aberto" data-track-label={title}>Abrir resumo visual →</a>
+  <a href={`/${bookSlug}/${slug}`} data-track="capitulo_aberto" data-track-label={title}>Explorar capítulo →</a>
 </article>

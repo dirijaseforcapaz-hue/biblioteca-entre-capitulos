@@ -1,21 +1,20 @@
 # Biblioteca Entre Capítulos
 
-Site editorial da **Biblioteca Entre Capítulos**, criado em Astro para reunir resumos visuais, mapas mentais e análises de livros, capítulo por capítulo.
+Versão **0.2.0** do site editorial da Biblioteca Entre Capítulos, criada em Astro para reunir análises, resumos visuais, mapas mentais e episódios de livros, capítulo por capítulo.
 
-## O que já existe nesta primeira versão
+## O que mudou na v0.2
 
-- Home responsiva
-- Página de biblioteca de livros
-- Template automático de página de livro
-- Template automático de página de capítulo
-- Livro piloto: **O Poder do Hábito**
-- Capítulo piloto: **O Loop do Hábito**
-- Mapa visual original do capítulo
-- SEO técnico básico (canonical, Open Graph, sitemap e robots)
-- Estrutura preparada para Google Analytics 4
-- Configuração pronta para Netlify
-- Páginas Sobre e Privacidade
-- Página 404
+- Home redesenhada para mostrar o produto real, não apenas uma apresentação institucional.
+- Progresso das coleções: capítulos publicados x total do livro.
+- Página de livro com roteiro completo, capítulos publicados e próximos capítulos.
+- Template de capítulo universal: nenhum conceito específico de um livro fica preso ao layout.
+- Seções opcionais e condicionais: conceito, exemplo, aplicações, mapa, vídeo e recursos premium só aparecem quando existem dados.
+- Página de capítulo com navegação interna, tempo de leitura, ideias principais, análise editorial e conexão com o restante do livro.
+- Vídeo deixa de exibir placeholder quando ainda não existe URL.
+- Estrutura para afiliados e mapas premium sem exibir CTAs vazios.
+- SEO aprimorado, sitemap XML real e metadados sociais.
+- Staging protegido contra indexação por padrão.
+- Identidade visual editorial reforçada e melhorias específicas para celular.
 
 ## Rodar localmente
 
@@ -26,42 +25,42 @@ npm install
 npm run dev
 ```
 
-O Astro mostrará no terminal o endereço local, normalmente `http://localhost:4321`.
-
 ## Publicar na Netlify
 
-1. Suba este projeto para o GitHub.
-2. Na Netlify, escolha **Add new site > Import an existing project**.
-3. Conecte o repositório.
-4. A Netlify deve detectar:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-5. Faça o deploy.
-6. Só depois conecte `bibliotecaentrecapitulos.com.br`.
+A configuração já está em `netlify.toml`:
 
-## Adicionar um novo capítulo
+- Build command: `npm run build`
+- Publish directory: `dist`
+- Node.js: 22
 
-Crie um arquivo Markdown dentro de:
+### Importante: staging x produção
 
-`src/content/capitulos/<slug-do-livro>/`
+A v0.2 usa a variável:
 
-Use o arquivo `01-o-loop-do-habito.md` como modelo. O site gera a página automaticamente.
+`PUBLIC_SITE_ENV`
+
+Enquanto o site estiver apenas no endereço temporário da Netlify, deixe:
+
+`PUBLIC_SITE_ENV=staging`
+
+Nesse modo, as páginas recebem `noindex` e o `robots.txt` bloqueia rastreamento.
+
+Somente depois de conectar o domínio definitivo `bibliotecaentrecapitulos.com.br`, altere para:
+
+`PUBLIC_SITE_ENV=production`
 
 ## Google Analytics
 
-Quando a propriedade GA4 existir, configure na Netlify a variável de ambiente:
+Quando a propriedade GA4 existir, configure na Netlify:
 
 `PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX`
 
 Se a variável estiver vazia, nenhum script do Google Analytics é carregado.
 
-## Próximos passos sugeridos
+## Adicionar um capítulo
 
-1. Aprovar o design da página piloto.
-2. Inserir a URL real do vídeo do capítulo.
-3. Cadastrar os demais capítulos de *O Poder do Hábito*.
-4. Conectar Search Console e Analytics.
-5. Publicar o domínio definitivo.
-6. Depois iniciar *Essencialismo*.
+Consulte `docs/COMO_ADICIONAR_CAPITULO.md`. A página é gerada a partir do conteúdo, e cada seção pode ser ligada ou desligada apenas adicionando ou omitindo campos no arquivo Markdown.
 
-> Este repositório é a base técnica. O conteúdo editorial deve continuar original, analítico e complementar à leitura das obras.
+## Regra editorial
+
+O conteúdo deve ser original, analítico e complementar às obras. A Biblioteca Entre Capítulos não deve reproduzir extensamente o texto dos livros nem se apresentar como substituta da leitura original.

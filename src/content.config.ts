@@ -1,6 +1,11 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const chapterOutlineItem = z.object({
+  number: z.number().int().positive(),
+  title: z.string()
+});
+
 const livros = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/livros' }),
   schema: z.object({
@@ -13,8 +18,19 @@ const livros = defineCollection({
     status: z.enum(['publicado', 'em-producao', 'planejado']).default('publicado'),
     featured: z.boolean().default(false),
     publishedAt: z.coerce.date(),
-    accent: z.string().default('sage')
+    updatedAt: z.coerce.date().optional(),
+    accent: z.string().default('sage'),
+    totalChapters: z.number().int().positive(),
+    chapterOutline: z.array(chapterOutlineItem).default([]),
+    affiliateUrl: z.string().url().optional(),
+    affiliateLabel: z.string().default('Ver o livro')
   })
+});
+
+const conceptItem = z.object({
+  label: z.string().optional(),
+  title: z.string(),
+  text: z.string()
 });
 
 const capitulos = defineCollection({
@@ -25,17 +41,45 @@ const capitulos = defineCollection({
     title: z.string(),
     slug: z.string(),
     kicker: z.string(),
+    takeaway: z.string(),
     summary: z.string(),
+    readingMinutes: z.number().int().positive().default(8),
+    concept: z.object({
+      eyebrow: z.string().default('Conceito central'),
+      title: z.string(),
+      description: z.string().optional(),
+      layout: z.enum(['flow', 'cards']).default('flow'),
+      items: z.array(conceptItem).min(1)
+    }).optional(),
     keyIdeas: z.array(z.object({
       title: z.string(),
       text: z.string()
-    })),
+    })).default([]),
+    caseStudy: z.object({
+      eyebrow: z.string().default('Exemplo para enxergar a ideia'),
+      title: z.string(),
+      text: z.string()
+    }).optional(),
+    whyItMatters: z.object({
+      title: z.string(),
+      text: z.string()
+    }).optional(),
+    bookConnection: z.object({
+      title: z.string(),
+      text: z.string()
+    }).optional(),
     applications: z.array(z.object({
       title: z.string(),
       text: z.string()
-    })),
+    })).default([]),
     mapImage: z.string().optional(),
-    videoUrl: z.string().optional(),
+    mapAlt: z.string().optional(),
+    mapCaption: z.string().optional(),
+    mapDownloadUrl: z.string().optional(),
+    premiumUrl: z.string().url().optional(),
+    premiumLabel: z.string().optional(),
+    videoUrl: z.string().url().optional(),
+    videoTitle: z.string().optional(),
     keywords: z.array(z.string()).default([]),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),

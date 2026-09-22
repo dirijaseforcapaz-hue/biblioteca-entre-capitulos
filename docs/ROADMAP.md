@@ -1,68 +1,67 @@
-# Roadmap - Biblioteca Entre Capítulos
+# Roadmap — Biblioteca Entre Capítulos
 
-## Fase atual - MVP técnico
+## Fase atual — v0.2
 
 - [x] Estrutura Astro
-- [x] Home
+- [x] Home editorial redesenhada
 - [x] Biblioteca de livros
-- [x] Template de livro
-- [x] Template de capítulo
-- [x] Capítulo piloto: O Loop do Hábito
-- [x] Mapa visual piloto
-- [x] SEO técnico básico
-- [x] Estrutura para GA4
-- [x] Configuração Netlify
-- [ ] Subir projeto ao GitHub
-- [ ] Fazer primeiro deploy na Netlify
-- [ ] Revisar design no celular e desktop
-- [ ] Conectar domínio definitivo
+- [x] Template universal de livro
+- [x] Template universal de capítulo
+- [x] Roteiro completo de O Poder do Hábito
+- [x] Capítulo 1 adaptado ao novo sistema
+- [x] Navegação interna do capítulo
+- [x] Seções condicionais sem placeholders públicos
+- [x] Estrutura para mapa, vídeo, afiliados e benefício premium
+- [x] SEO técnico e sitemap XML
+- [x] Proteção `noindex` para staging
+- [x] Melhorias mobile
+- [ ] Subir v0.2 no GitHub
+- [ ] Validar novo deploy na Netlify
+- [ ] Revisar visual em celular e desktop reais
 
-## Fase 2 - O Poder do Hábito completo
+## Fase 2 — O Poder do Hábito completo
 
-- [ ] Cadastrar capítulos 2 a 9
-- [ ] Inserir URLs dos vídeos reais
-- [ ] Criar mapa de cada capítulo
-- [ ] Criar mapa mestre do livro
-- [ ] Revisar links anterior/próximo
+- [ ] Capítulo 2 — O Cérebro Ansioso
+- [ ] Capítulo 3 — A Regra de Ouro da Mudança de Hábito
+- [ ] Capítulo 4 — Hábitos Angulares
+- [ ] Capítulo 5 — Starbucks e o Hábito do Sucesso
+- [ ] Capítulo 6 — O Poder de uma Crise
+- [ ] Capítulo 7 — Target
+- [ ] Capítulo 8 — Saddleback Church e Montgomery
+- [ ] Capítulo 9 — A Neurologia do Livre-Arbítrio
+- [ ] URLs reais dos episódios
+- [ ] Mapas de todos os capítulos
+- [ ] Mapa mestre do livro
 
-## Fase 3 - Métricas e aquisição
+## Fase 3 — Domínio e métricas
 
+- [ ] Conectar `bibliotecaentrecapitulos.com.br`
+- [ ] Alterar `PUBLIC_SITE_ENV` para `production`
 - [ ] Criar propriedade GA4
 - [ ] Configurar `PUBLIC_GA_MEASUREMENT_ID`
-- [ ] Criar propriedade no Search Console
-- [ ] Enviar sitemap
+- [ ] Conectar Search Console
+- [ ] Enviar `/sitemap.xml`
 - [ ] Definir UTMs dos links do YouTube
-- [ ] Configurar eventos importantes
 
-Eventos previstos:
-
-- `livro_aberto`
-- `capitulo_aberto`
-- `mapa_aberto`
-- `cta_explorar_biblioteca`
-- `cta_capitulo_piloto`
-
-## Fase 4 - Segundo livro
+## Fase 4 — Segundo livro
 
 - [ ] Cadastrar Essencialismo
-- [ ] Validar se adicionar um novo livro exige apenas conteúdo, sem alterar layout
-- [ ] Criar filtros por tema quando o acervo justificar
+- [ ] Validar que o novo livro funciona sem alterar o template
+- [ ] Criar mapas e episódios da coleção
 
-## Fase 5 - Monetização
+## Fase 5 — Monetização
 
-- [ ] Política de privacidade definitiva
-- [ ] Consentimento/cookies quando aplicável
-- [ ] Programa de afiliados
-- [ ] Espaços publicitários sem prejudicar leitura
+- [ ] Inserir links de afiliado quando aprovados
+- [ ] Revisar política de privacidade e consentimento
 - [ ] Avaliar AdSense após acervo e tráfego suficientes
+- [ ] Definir produtos digitais e materiais próprios
 
-## Fase 6 - Clube Entre Capítulos
+## Fase 6 — Clube Entre Capítulos
 
-Somente quando o benefício de membros estiver disponível e houver acervo suficiente:
+Quando houver acervo e benefício de membros:
 
-- [ ] Login/autenticação
-- [ ] Conteúdo premium
-- [ ] PDFs em alta resolução
+- [ ] Definir autenticação
+- [ ] PDFs e mapas em alta resolução
 - [ ] Mapas mestres
-- [ ] Área sem anúncios ou com publicidade reduzida
-- [ ] Integração de acesso com o sistema escolhido
+- [ ] Materiais extras
+- [ ] Experiência premium

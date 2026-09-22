@@ -24,6 +24,15 @@ const next = index >= 0 && index < allBookChapters.length - 1 ? allBookChapters[
 const { Content } = await render(chapter);
 
 const youtubeId = chapter.data.videoUrl?.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/)?.[1];
+const sectionLinks = [
+  { href: '#resumo', label: 'Em uma frase', visible: true },
+  { href: '#conceito', label: 'Conceito', visible: Boolean(chapter.data.concept) },
+  { href: '#ideias', label: 'Ideias', visible: chapter.data.keyIdeas.length > 0 },
+  { href: '#analise', label: 'Análise', visible: true },
+  { href: '#pratica', label: 'Prática', visible: chapter.data.applications.length > 0 },
+  { href: '#mapa', label: 'Mapa', visible: Boolean(chapter.data.mapImage) },
+  { href: '#episodio', label: 'Episódio', visible: Boolean(youtubeId) }
+].filter((item) => item.visible);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -32,86 +41,153 @@ const jsonLd = {
   description: chapter.data.summary,
   datePublished: chapter.data.publishedAt.toISOString(),
   dateModified: (chapter.data.updatedAt ?? chapter.data.publishedAt).toISOString(),
+  keywords: chapter.data.keywords.join(', '),
   isPartOf: { '@type': 'Book', name: book.data.title, author: book.data.author }
 };
 ---
-<BaseLayout title={`${chapter.data.title} - ${book.data.title}`} description={chapter.data.summary} type="article" progress={true} jsonLd={jsonLd}>
-  <article>
-    <header class="chapter-hero">
+<BaseLayout
+  title={`${chapter.data.title} - ${book.data.title}`}
+  description={chapter.data.summary}
+  type="article"
+  progress={true}
+  jsonLd={jsonLd}
+  keywords={chapter.data.keywords}
+>
+  <article class="chapter-article">
+    <header class="chapter-hero chapter-hero-v2">
       <div class="container">
         <div class="breadcrumbs"><a href="/">Início</a><span>›</span><a href="/livros">Livros</a><span>›</span><a href={`/livros/${book.data.slug}`}>{book.data.title}</a><span>›</span><span>Capítulo {chapter.data.number}</span></div>
-        <p class="eyebrow">{book.data.title} · capítulo {String(chapter.data.number).padStart(2, '0')}</p>
-        <h1>{chapter.data.title}</h1>
-        <p class="chapter-kicker">{chapter.data.kicker}</p>
-        <div class="chapter-meta"><span class="badge">{book.data.author}</span><span class="badge">Resumo visual</span><span class="badge">Mapa Entre Capítulos</span></div>
+        <div class="chapter-title-grid">
+          <div>
+            <p class="eyebrow">{book.data.title} · capítulo {String(chapter.data.number).padStart(2, '0')}</p>
+            <h1>{chapter.data.title}</h1>
+            <p class="chapter-kicker">{chapter.data.kicker}</p>
+          </div>
+          <div class="chapter-facts" aria-label="Informações da leitura">
+            <div><span>Leitura</span><strong>~{chapter.data.readingMinutes} min</strong></div>
+            <div><span>Conceitos</span><strong>{chapter.data.keyIdeas.length}</strong></div>
+            <div><span>Coleção</span><strong>{chapter.data.number}/{book.data.totalChapters}</strong></div>
+          </div>
+        </div>
       </div>
     </header>
 
-    <div class="reading-width">
-      <section class="summary-box" aria-labelledby="resumo-visual">
-        <p id="resumo-visual">{chapter.data.summary}</p>
-      </section>
-
-      <section class="loop-section" aria-labelledby="conceito-central">
-        <p class="eyebrow">Conceito central</p>
-        <h2 id="conceito-central">O ciclo básico do hábito</h2>
-        <div class="loop-visual" role="list" aria-label="Deixa, rotina e recompensa">
-          <div class="loop-step" role="listitem"><span>01 · sinal</span><strong>Deixa</strong><span>Algo indica que o padrão pode começar.</span></div>
-          <div class="loop-arrow" aria-hidden="true">→</div>
-          <div class="loop-step" role="listitem"><span>02 · ação</span><strong>Rotina</strong><span>O comportamento conhecido é executado.</span></div>
-          <div class="loop-arrow" aria-hidden="true">→</div>
-          <div class="loop-step" role="listitem"><span>03 · retorno</span><strong>Recompensa</strong><span>O resultado ajuda o cérebro a reforçar o caminho.</span></div>
+    <nav class="chapter-section-nav" aria-label="Navegação deste capítulo">
+      <div class="container chapter-section-nav-inner">
+        <span class="section-nav-label">Neste capítulo</span>
+        <div class="section-nav-links">
+          {sectionLinks.map((item) => <a href={item.href}>{item.label}</a>)}
         </div>
-        <p style="color:rgba(255,255,255,.72); margin:0;">A utilidade do modelo está em separar um comportamento aparentemente único em partes que podem ser observadas e testadas.</p>
+      </div>
+    </nav>
+
+    <div class="reading-width chapter-reading">
+      <section id="resumo" class="summary-box summary-box-v2" aria-labelledby="resumo-visual">
+        <span class="summary-label">Em uma frase</span>
+        <p id="resumo-visual">{chapter.data.takeaway}</p>
       </section>
 
-      <section aria-labelledby="ideias-principais">
-        <p class="eyebrow">Três ideias para guardar</p>
-        <h2 id="ideias-principais">O capítulo em blocos.</h2>
-        <div class="idea-grid">
-          {chapter.data.keyIdeas.map((idea) => <article class="card idea-card"><h3>{idea.title}</h3><p>{idea.text}</p></article>)}
-        </div>
-      </section>
-
-      <section class="article-body" aria-label="Análise do capítulo"><Content /></section>
-
-      <section class="application-section" aria-labelledby="aplicacao-pratica">
-        <p class="eyebrow">Aplicação prática</p>
-        <h2 id="aplicacao-pratica">Observe seu próprio ciclo.</h2>
-        <p class="lead">Use estas perguntas como experimento de observação. A ideia é entender o padrão antes de tentar substituí-lo.</p>
-        <div class="application-grid">
-          {chapter.data.applications.map((item, i) => <article class="application-card"><div class="step">{i + 1}</div><h3>{item.title}</h3><p>{item.text}</p></article>)}
-        </div>
-      </section>
-
-      {chapter.data.mapImage && (
-        <section class="map-panel" aria-labelledby="mapa-entre-capitulos">
-          <div class="map-frame"><img src={chapter.data.mapImage} alt={`Mapa visual do capítulo ${chapter.data.title}`} loading="lazy" /></div>
-          <div>
-            <p class="eyebrow">Mapa Entre Capítulos</p>
-            <h2 id="mapa-entre-capitulos">Revise em uma imagem.</h2>
-            <p>O mapa reúne o ciclo central, perguntas de observação e a conexão entre os elementos do capítulo.</p>
-            <a class="btn btn-primary" href={chapter.data.mapImage} target="_blank" rel="noopener" data-track="mapa_aberto" data-track-label={chapter.data.title}>Abrir mapa em tela cheia ↗</a>
+      {chapter.data.concept && (
+        <section id="conceito" class:list={['concept-section', `concept-${chapter.data.concept.layout}`]} aria-labelledby="conceito-central">
+          <div class="concept-heading">
+            <p class="eyebrow">{chapter.data.concept.eyebrow}</p>
+            <h2 id="conceito-central">{chapter.data.concept.title}</h2>
+            {chapter.data.concept.description && <p class="concept-description">{chapter.data.concept.description}</p>}
+          </div>
+          <div class="concept-items" role="list">
+            {chapter.data.concept.items.map((item, i) => (
+              <Fragment>
+                <article class="concept-item" role="listitem">
+                  {item.label && <span>{item.label}</span>}
+                  <strong>{item.title}</strong>
+                  <p>{item.text}</p>
+                </article>
+                {chapter.data.concept?.layout === 'flow' && i < chapter.data.concept.items.length - 1 && <div class="concept-arrow" aria-hidden="true">→</div>}
+              </Fragment>
+            ))}
           </div>
         </section>
       )}
 
-      <section class="video-panel" aria-labelledby="episodio-video">
-        <p class="eyebrow" style="color:#dbe7df; justify-content:center;">Entre Capítulos Podcast</p>
-        <h2 id="episodio-video">Assista à análise completa.</h2>
-        <p>Quando a URL do episódio for cadastrada no arquivo do capítulo, o vídeo aparece aqui automaticamente.</p>
-        {youtubeId ? (
-          <div class="video-embed"><iframe src={`https://www.youtube-nocookie.com/embed/${youtubeId}`} title={`Vídeo: ${chapter.data.title}`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-        ) : (
-          <div class="video-placeholder">Vídeo do YouTube será conectado aqui.</div>
-        )}
+      {chapter.data.keyIdeas.length > 0 && (
+        <section id="ideias" class="key-ideas-section" aria-labelledby="ideias-principais">
+          <div class="section-mini-head"><p class="eyebrow">Ideias para guardar</p><h2 id="ideias-principais">O capítulo em blocos.</h2></div>
+          <div class="idea-grid">
+            {chapter.data.keyIdeas.map((idea, i) => <article class="idea-card"><span class="idea-index">0{i + 1}</span><h3>{idea.title}</h3><p>{idea.text}</p></article>)}
+          </div>
+        </section>
+      )}
+
+      {chapter.data.caseStudy && (
+        <aside class="case-study">
+          <div class="case-study-number" aria-hidden="true">↳</div>
+          <div><p class="eyebrow">{chapter.data.caseStudy.eyebrow}</p><h2>{chapter.data.caseStudy.title}</h2><p>{chapter.data.caseStudy.text}</p></div>
+        </aside>
+      )}
+
+      <section id="analise" class="analysis-section" aria-labelledby="analise-titulo">
+        <div class="analysis-label"><span>Entre Capítulos</span><strong id="analise-titulo">Análise</strong></div>
+        <div class="article-body"><Content /></div>
       </section>
 
-      <aside class="notice">Este material é uma análise editorial independente e complementar. Ele não substitui a leitura do livro, e evita reproduzir extensamente o texto da obra.</aside>
+      {chapter.data.whyItMatters && (
+        <section class="editorial-callout why-it-matters">
+          <span class="callout-mark" aria-hidden="true">!</span>
+          <div><p class="eyebrow">Por que isso importa?</p><h2>{chapter.data.whyItMatters.title}</h2><p>{chapter.data.whyItMatters.text}</p></div>
+        </section>
+      )}
+
+      {chapter.data.bookConnection && (
+        <section class="book-connection">
+          <div class="connection-rail"><span>{String(chapter.data.number).padStart(2, '0')}</span><i></i><b>{String(Math.min(chapter.data.number + 1, book.data.totalChapters)).padStart(2, '0')}</b></div>
+          <div><p class="eyebrow">Conexão com o livro</p><h2>{chapter.data.bookConnection.title}</h2><p>{chapter.data.bookConnection.text}</p><a class="text-link" href={`/livros/${book.data.slug}`}>Ver roteiro completo do livro <span aria-hidden="true">→</span></a></div>
+        </section>
+      )}
+
+      {chapter.data.applications.length > 0 && (
+        <section id="pratica" class="application-section" aria-labelledby="aplicacao-pratica">
+          <div class="section-mini-head"><p class="eyebrow">Coloque em prática</p><h2 id="aplicacao-pratica">Transforme a ideia em observação.</h2><p class="lead">Não tente mudar tudo de uma vez. Use as perguntas abaixo como um pequeno experimento de atenção ao próprio comportamento.</p></div>
+          <div class="application-grid">
+            {chapter.data.applications.map((item, i) => <article class="application-card"><div class="step">{String(i + 1).padStart(2, '0')}</div><h3>{item.title}</h3><p>{item.text}</p></article>)}
+          </div>
+        </section>
+      )}
+
+      {chapter.data.mapImage && (
+        <section id="mapa" class="map-panel map-panel-v2" aria-labelledby="mapa-entre-capitulos">
+          <div class="map-copy">
+            <p class="eyebrow">Mapa Entre Capítulos</p>
+            <h2 id="mapa-entre-capitulos">Uma imagem para voltar à ideia.</h2>
+            <p>{chapter.data.mapCaption ?? 'Revise os principais conceitos e conexões do capítulo em uma síntese visual.'}</p>
+            <div class="map-actions">
+              <a class="btn btn-primary" href={chapter.data.mapImage} target="_blank" rel="noopener" data-track="mapa_aberto" data-track-label={chapter.data.title}>Abrir mapa <span aria-hidden="true">↗</span></a>
+              {chapter.data.mapDownloadUrl && <a class="btn btn-secondary" href={chapter.data.mapDownloadUrl} download data-track="mapa_baixado" data-track-label={chapter.data.title}>Baixar mapa</a>}
+              {chapter.data.premiumUrl && <a class="btn btn-secondary" href={chapter.data.premiumUrl} data-track="premium_clicado" data-track-label={chapter.data.title}>{chapter.data.premiumLabel ?? 'Ver versão para membros'}</a>}
+            </div>
+          </div>
+          <a class="map-frame" href={chapter.data.mapImage} target="_blank" rel="noopener" aria-label="Abrir mapa em tela cheia">
+            <img src={chapter.data.mapImage} alt={chapter.data.mapAlt ?? `Mapa visual do capítulo ${chapter.data.title}`} loading="lazy" />
+            <span class="map-zoom">Ampliar ↗</span>
+          </a>
+        </section>
+      )}
+
+      {youtubeId && (
+        <section id="episodio" class="video-panel video-panel-v2" aria-labelledby="episodio-video">
+          <div class="video-copy"><p class="eyebrow">Entre Capítulos Podcast</p><h2 id="episodio-video">Continue no episódio.</h2><p>A análise em vídeo aprofunda as conexões do capítulo e complementa esta leitura visual.</p></div>
+          <div class="video-embed"><iframe src={`https://www.youtube-nocookie.com/embed/${youtubeId}`} title={chapter.data.videoTitle ?? `Vídeo: ${chapter.data.title}`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        </section>
+      )}
+
+      {chapter.data.keywords.length > 0 && (
+        <div class="topic-row" aria-label="Temas deste capítulo"><span>Temas</span>{chapter.data.keywords.slice(0, 4).map((keyword) => <b>{keyword}</b>)}</div>
+      )}
+
+      <aside class="notice">Esta página é uma análise editorial independente e complementar. O objetivo é organizar conceitos e criar conexões sem substituir a leitura da obra original.</aside>
 
       <nav class="chapter-nav" aria-label="Navegação entre capítulos">
-        {previous ? <a href={`/${previous.data.bookSlug}/${previous.data.slug}`}><span>← Capítulo anterior</span><strong>{previous.data.title}</strong></a> : <div><span>Início da coleção</span><strong>{book.data.title}</strong></div>}
-        {next ? <a class="next" href={`/${next.data.bookSlug}/${next.data.slug}`}><span>Próximo capítulo →</span><strong>{next.data.title}</strong></a> : <a class="next" href={`/livros/${book.data.slug}`}><span>Voltar à coleção →</span><strong>Ver todos os capítulos</strong></a>}
+        {previous ? <a href={`/${previous.data.bookSlug}/${previous.data.slug}`}><span>← Capítulo anterior</span><strong>{previous.data.title}</strong></a> : <a href={`/livros/${book.data.slug}`}><span>← Ver coleção</span><strong>{book.data.title}</strong></a>}
+        {next ? <a class="next" href={`/${next.data.bookSlug}/${next.data.slug}`}><span>Próximo capítulo →</span><strong>{next.data.title}</strong></a> : <a class="next" href={`/livros/${book.data.slug}`}><span>Continuar pela coleção →</span><strong>Ver roteiro do livro</strong></a>}
       </nav>
     </div>
   </article>

@@ -10,15 +10,26 @@ interface Props {
   canonical?: string;
   type?: 'website' | 'article';
   progress?: boolean;
+  image?: string;
+  keywords?: string[];
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, canonical, type = 'website', progress = false, jsonLd } = Astro.props;
+const {
+  title,
+  description,
+  canonical,
+  type = 'website',
+  progress = false,
+  image,
+  keywords = [],
+  jsonLd
+} = Astro.props;
 ---
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <BaseHead title={title} description={description} canonical={canonical} type={type} />
+    <BaseHead title={title} description={description} canonical={canonical} type={type} image={image} keywords={keywords} />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>}
   </head>
   <body>
@@ -32,12 +43,18 @@ const { title, description, canonical, type = 'website', progress = false, jsonL
     <script is:inline>
       document.addEventListener('click', (event) => {
         const target = event.target instanceof Element ? event.target.closest('[data-track]') : null;
-        if (!target) return;
-        const eventName = target.getAttribute('data-track');
-        if (eventName && typeof window.gtag === 'function') {
-          window.gtag('event', eventName, {
-            event_label: target.getAttribute('data-track-label') || target.textContent?.trim() || ''
-          });
+        if (target) {
+          const eventName = target.getAttribute('data-track');
+          if (eventName && typeof window.gtag === 'function') {
+            window.gtag('event', eventName, {
+              event_label: target.getAttribute('data-track-label') || target.textContent?.trim() || ''
+            });
+          }
+        }
+
+        const mobileMenuLink = event.target instanceof Element ? event.target.closest('.mobile-menu-panel a') : null;
+        if (mobileMenuLink) {
+          mobileMenuLink.closest('details')?.removeAttribute('open');
         }
       });
 

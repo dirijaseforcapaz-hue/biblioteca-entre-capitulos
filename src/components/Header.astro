@@ -9,18 +9,18 @@ const links = [
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="/" aria-label="Biblioteca Entre Capítulos - página inicial">
-      <span class="brand-mark" aria-hidden="true">EC</span>
-      <span>Biblioteca Entre Capítulos<small>do canal Entre Capítulos</small></span>
+      <span class="brand-mark" aria-hidden="true"><span>EC</span></span>
+      <span class="brand-copy"><strong>Biblioteca Entre Capítulos</strong><small>do canal Entre Capítulos</small></span>
     </a>
 
     <nav class="nav" aria-label="Navegação principal">
       {links.map((link) => (
-        <a href={link.href} aria-current={path === link.href ? 'page' : undefined}>{link.label}</a>
+        <a href={link.href} aria-current={path === link.href || (link.href !== '/' && path.startsWith(link.href)) ? 'page' : undefined}>{link.label}</a>
       ))}
     </nav>
 
     <details class="mobile-menu">
-      <summary>Menu</summary>
+      <summary aria-label="Abrir menu"><span>Menu</span></summary>
       <nav class="mobile-menu-panel" aria-label="Navegação móvel">
         {links.map((link) => <a href={link.href}>{link.label}</a>)}
       </nav>

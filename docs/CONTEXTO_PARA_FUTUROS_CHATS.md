@@ -6,11 +6,13 @@ Nome do canal: **Entre Capítulos**
 
 Nome do site: **Biblioteca Entre Capítulos**
 
-Domínio pretendido: **bibliotecaentrecapitulos.com.br**
+Domínio definitivo planejado: **bibliotecaentrecapitulos.com.br**
+
+URL de staging usada durante o desenvolvimento: domínio temporário da Netlify.
 
 Objetivo: transformar os episódios do canal em uma biblioteca visual e indexável de livros, com uma página para cada livro e uma página para cada capítulo.
 
-## Tecnologia decidida
+## Tecnologia
 
 - Astro
 - TypeScript
@@ -18,18 +20,24 @@ Objetivo: transformar os episódios do canal em uma biblioteca visual e indexáv
 - Netlify para hospedagem e deploy
 - Google Analytics 4 para comportamento
 - Google Search Console para SEO
-- Futuramente: AdSense, afiliados, produtos e membros
+- Futuramente: afiliados, produtos, AdSense e membros
 
-## Estratégia econômica
+## Estado atual
 
-AdSense é **monetização complementar**.
+A versão técnica atual é **v0.2**.
 
-As camadas de maior valor previstas são:
+Ela inclui:
 
-1. afiliados de livros;
-2. produtos próprios, mapas e materiais;
-3. futura assinatura/membros;
-4. publicidade conforme o tráfego crescer.
+- home editorial redesenhada;
+- progresso das coleções;
+- página de livro com roteiro completo;
+- template universal de capítulo;
+- seções condicionais;
+- navegação interna no capítulo;
+- estrutura de mapa, vídeo, afiliados e premium;
+- SEO e sitemap XML;
+- staging com `noindex` por padrão;
+- melhorias mobile.
 
 ## Arquitetura editorial
 
@@ -37,27 +45,29 @@ Cada livro é cadastrado em `src/content/livros/`.
 
 Cada capítulo é cadastrado em `src/content/capitulos/`.
 
-O site gera automaticamente as páginas usando templates. Não criar páginas manualmente para cada capítulo.
+O layout do capítulo não deve conter conceitos específicos de um livro. Todo conteúdo variável deve vir do arquivo do capítulo.
 
-## Primeiro piloto
+## Primeira coleção
 
 Livro: **O Poder do Hábito**, de Charles Duhigg.
 
-Capítulo piloto: **O Loop do Hábito**.
+A coleção possui roteiro de 9 capítulos. O primeiro capítulo publicado é **O Loop do Hábito**.
 
-A página deve combinar:
+## Regra de staging
 
-- resumo visual;
-- conceito central;
-- ideias principais;
-- análise original;
-- aplicação prática;
-- mapa Entre Capítulos;
-- vídeo do YouTube;
-- navegação anterior/próximo.
+Enquanto o site estiver somente no endereço temporário da Netlify:
 
-## Próximo passo ao retomar
+`PUBLIC_SITE_ENV=staging`
 
-Se o projeto ainda não estiver publicado: ajudar a subir os arquivos para o GitHub e conectar o repositório à Netlify.
+Somente depois de conectar o domínio definitivo e decidir liberar indexação:
 
-Se já estiver publicado: abrir a URL da Netlify, revisar design desktop/mobile e fazer a primeira rodada de ajustes antes de conectar o domínio.
+`PUBLIC_SITE_ENV=production`
+
+## Próximos passos
+
+1. Subir os arquivos da v0.2 no GitHub.
+2. Confirmar o deploy automático da Netlify.
+3. Revisar a v0.2 em desktop e celular reais.
+4. Ajustar detalhes visuais encontrados no site publicado.
+5. Cadastrar os capítulos 2 a 9 de O Poder do Hábito.
+6. Conectar domínio, GA4 e Search Console quando a coleção estiver pronta para divulgação.

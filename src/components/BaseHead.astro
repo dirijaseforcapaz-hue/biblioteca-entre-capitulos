@@ -4,22 +4,37 @@ interface Props {
   description: string;
   canonical?: string;
   type?: 'website' | 'article';
+  image?: string;
+  keywords?: string[];
 }
 
-const { title, description, canonical, type = 'website' } = Astro.props;
+const {
+  title,
+  description,
+  canonical,
+  type = 'website',
+  image = '/images/social-card.png',
+  keywords = []
+} = Astro.props;
+
 const siteBase = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteBase).toString();
-
+const socialImage = new URL(image, siteBase).toString();
 const siteName = 'Biblioteca Entre Capítulos';
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const siteEnv = import.meta.env.PUBLIC_SITE_ENV ?? 'staging';
+const isProduction = siteEnv === 'production';
 ---
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#f4f0e6" />
+<meta name="theme-color" content="#f3efe5" />
+<meta name="color-scheme" content="light" />
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+<meta name="robots" content={isProduction ? 'index,follow,max-image-preview:large' : 'noindex,nofollow,noarchive'} />
 <link rel="canonical" href={canonicalUrl} />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="manifest" href="/site.webmanifest" />
@@ -28,10 +43,12 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 <meta property="og:description" content={description} />
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalUrl} />
-<meta property="og:image" content={new URL('/images/social-card.png', siteBase).toString()} />
+<meta property="og:image" content={socialImage} />
+<meta property="og:image:alt" content={`${title} — Biblioteca Entre Capítulos`} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImage} />
 
 {gaId && (
   <>

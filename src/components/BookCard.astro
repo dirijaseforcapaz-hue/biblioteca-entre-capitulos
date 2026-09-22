@@ -7,21 +7,29 @@ interface Props {
   slug: string;
   category: string;
   chapterCount: number;
+  totalChapters: number;
+  status?: 'publicado' | 'em-producao' | 'planejado';
 }
-const { title, author, description, cover, slug, category, chapterCount } = Astro.props;
+const { title, author, description, cover, slug, category, chapterCount, totalChapters, status = 'publicado' } = Astro.props;
+const progress = Math.min(100, Math.round((chapterCount / Math.max(totalChapters, 1)) * 100));
+const statusLabel = status === 'em-producao' ? 'Coleção em andamento' : status === 'planejado' ? 'Em breve' : 'Coleção publicada';
 ---
 <article class="card book-card">
-  <div class="book-card-cover">
-    <img src={cover} alt={`Capa editorial da coleção ${title}`} loading="lazy" width="280" height="380" />
-  </div>
+  <a class="book-card-cover" href={`/livros/${slug}`} aria-label={`Abrir ${title}`} data-track="livro_aberto" data-track-label={title}>
+    <img src={cover} alt={`Capa de ${title}, de ${author}`} loading="lazy" width="280" height="380" />
+  </a>
   <div class="book-card-body">
-    <span class="eyebrow">{category}</span>
-    <h3><a href={`/livros/${slug}`}>{title}</a></h3>
-    <div class="book-meta">
-      <span class="badge">{author}</span>
-      <span class="badge">{chapterCount} {chapterCount === 1 ? 'capítulo' : 'capítulos'}</span>
+    <div class="book-card-topline">
+      <span class="eyebrow">{category}</span>
+      <span class="status-dot"><i aria-hidden="true"></i>{statusLabel}</span>
     </div>
-    <p>{description}</p>
-    <div><a class="btn btn-secondary" href={`/livros/${slug}`} data-track="livro_aberto" data-track-label={title}>Explorar livro →</a></div>
+    <h3><a href={`/livros/${slug}`}>{title}</a></h3>
+    <p class="book-author">{author}</p>
+    <p class="book-card-description">{description}</p>
+    <div class="collection-progress" aria-label={`${chapterCount} de ${totalChapters} capítulos publicados`}>
+      <div class="collection-progress-copy"><strong>{chapterCount} de {totalChapters}</strong><span>capítulos publicados</span></div>
+      <div class="collection-progress-track"><span style={`width:${progress}%`}></span></div>
+    </div>
+    <div class="book-card-actions"><a class="text-link" href={`/livros/${slug}`} data-track="livro_aberto" data-track-label={title}>Explorar coleção <span aria-hidden="true">→</span></a></div>
   </div>
 </article>

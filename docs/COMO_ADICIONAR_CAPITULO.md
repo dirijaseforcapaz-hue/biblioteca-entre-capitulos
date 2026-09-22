@@ -1,66 +1,81 @@
-# Como adicionar um novo capítulo
+# Como adicionar um novo capítulo — v0.2
 
-Você não precisa criar uma nova página manualmente. O site usa um **molde único** para todos os capítulos.
+A v0.2 usa um template universal. Você não cria uma página nova manualmente: cria um arquivo de conteúdo, e o site monta a página automaticamente.
 
-## 1. Duplique o arquivo modelo
+## 1. Duplique um capítulo existente
 
 Use como referência:
 
 `src/content/capitulos/o-poder-do-habito/01-o-loop-do-habito.md`
 
-Para o capítulo 2, por exemplo, crie:
+Para o capítulo 2, por exemplo:
 
 `src/content/capitulos/o-poder-do-habito/02-o-cerebro-ansioso.md`
 
-## 2. Altere os dados do topo
-
-Os dados entre `---` dizem ao site qual livro, número, título, resumo, mapa e vídeo usar.
-
-Campos mais importantes:
+## 2. Campos obrigatórios
 
 - `bookSlug`: identifica o livro.
 - `number`: número do capítulo.
-- `title`: título exibido na página.
+- `title`: título da página.
 - `slug`: parte final da URL.
-- `summary`: resumo curto usado no topo e no Google.
-- `keyIdeas`: três ou mais ideias principais.
-- `applications`: exercícios ou aplicações.
-- `mapImage`: caminho do mapa visual.
-- `videoUrl`: URL do vídeo do YouTube.
-- `keywords`: termos importantes relacionados ao capítulo.
+- `kicker`: frase curta abaixo do título.
+- `takeaway`: ideia do capítulo em uma frase.
+- `summary`: descrição usada no site e nos metadados.
+- `readingMinutes`: estimativa de leitura.
+- `publishedAt`: data de publicação.
 
-## 3. Escreva a análise
+## 3. Seções opcionais
 
-Depois do segundo `---`, escreva o conteúdo usando Markdown.
+A grande mudança da v0.2 é que o layout não contém mais conteúdo específico de O Loop do Hábito. Você pode ligar ou desligar seções apenas preenchendo os dados.
 
-Exemplo:
+### Conceito central
 
-```md
-## Primeira ideia
+Use `concept` quando houver um modelo, processo ou conjunto de ideias que merece destaque visual.
 
-Texto original da análise...
+`layout: flow` cria uma sequência com setas.
 
-## Segunda ideia
+`layout: cards` cria blocos independentes.
 
-Texto original da análise...
-```
+### Ideias principais
 
-## 4. Adicione o mapa
+Use `keyIdeas` para os pontos que o leitor deve guardar.
 
-Salve a imagem em:
+### Exemplo ou caso
 
-`public/images/maps/`
+Use `caseStudy` para um exemplo original, caso analisado ou situação que ajude a enxergar o conceito.
 
-Depois informe o caminho no campo `mapImage`.
+### Por que isso importa
 
-## 5. Publique
+Use `whyItMatters` para a interpretação editorial do Entre Capítulos.
 
-Quando o arquivo chegar ao GitHub, a Netlify executará uma nova versão do site automaticamente.
+### Conexão com o livro
 
-A página nascerá no padrão:
+Use `bookConnection` para explicar como aquele capítulo se liga ao argumento maior da obra.
 
-`bibliotecaentrecapitulos.com.br/<livro>/<capitulo>`
+### Aplicação prática
 
-## Regra editorial
+Use `applications` para perguntas, exercícios ou pequenos experimentos.
 
-O conteúdo deve ser uma análise original e complementar, evitando grandes reproduções literais da obra.
+### Mapa
+
+Use `mapImage`. Se houver arquivo para download, adicione `mapDownloadUrl`. No futuro, `premiumUrl` e `premiumLabel` podem apontar para um benefício de membros.
+
+### Vídeo
+
+Adicione `videoUrl` somente quando o episódio já estiver publicado. Se o campo for omitido, a seção de vídeo não aparece.
+
+## 4. Texto da análise
+
+Depois do segundo `---`, escreva a análise em Markdown. O ideal é que o texto tenha voz própria, organize ideias e conecte o capítulo ao restante da obra.
+
+## 5. Atualize o roteiro do livro
+
+O roteiro completo fica no arquivo do livro, por exemplo:
+
+`src/content/livros/o-poder-do-habito.md`
+
+O campo `chapterOutline` pode listar capítulos que ainda não foram publicados. A página do livro mostra automaticamente quais estão disponíveis e quais estão em preparação.
+
+## 6. Publicação
+
+Depois que o arquivo chegar ao GitHub, a Netlify dispara um novo deploy automaticamente.

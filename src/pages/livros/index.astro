@@ -3,17 +3,20 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BookCard from '../../components/BookCard.astro';
 
-const books = await getCollection('livros');
+const books = (await getCollection('livros')).sort((a, b) => Number(b.data.featured) - Number(a.data.featured));
 const chapters = await getCollection('capitulos');
 ---
-<BaseLayout title="Livros" description="Explore os livros disponíveis na Biblioteca Entre Capítulos.">
-  <section class="page-hero">
-    <div class="container">
-      <p class="eyebrow">Acervo</p>
-      <h1>Livros</h1>
-      <p class="lead">Cada coleção reúne análises capítulo a capítulo, mapas visuais e conexões para facilitar revisão e aplicação.</p>
+<BaseLayout title="Livros" description="Explore as coleções da Biblioteca Entre Capítulos: análises, mapas e conexões organizadas livro por livro.">
+  <section class="page-hero library-page-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <p class="eyebrow">Acervo Entre Capítulos</p>
+        <h1>Livros para entender.<br /><em>Ideias para revisitar.</em></h1>
+      </div>
+      <p class="lead">Cada coleção transforma um livro em uma sequência navegável de análises, mapas visuais e aplicações. Comece pelo capítulo que quiser e retorne quando precisar rever uma ideia.</p>
     </div>
   </section>
+
   <section class="section-compact">
     <div class="container library-grid">
       {books.map((book) => (
@@ -25,6 +28,8 @@ const chapters = await getCollection('capitulos');
           slug={book.data.slug}
           category={book.data.category}
           chapterCount={chapters.filter((chapter) => chapter.data.bookSlug === book.data.slug).length}
+          totalChapters={book.data.totalChapters}
+          status={book.data.status}
         />
       ))}
     </div>
