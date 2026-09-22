@@ -15,6 +15,10 @@ const chapters = (await getCollection('capitulos'))
 const byNumber = new Map(chapters.map((chapter) => [chapter.data.number, chapter]));
 const firstChapter = chapters[0];
 const progress = Math.min(100, Math.round((chapters.length / book.data.totalChapters) * 100));
+const specialVideos = book.data.specialVideos.map((video) => ({
+  ...video,
+  youtubeId: video.url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/)?.[1]
+})).filter((video) => Boolean(video.youtubeId));
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -40,7 +44,7 @@ const jsonLd = {
           <p class="book-description">{book.data.description}</p>
 
           <div class="book-progress-panel">
-            <div class="book-progress-top"><span>Coleção em andamento</span><strong>{chapters.length} de {book.data.totalChapters} capítulos</strong></div>
+            <div class="book-progress-top"><span>{chapters.length === book.data.totalChapters ? 'Coleção completa' : 'Coleção em andamento'}</span><strong>{chapters.length} de {book.data.totalChapters} capítulos</strong></div>
             <div class="collection-progress-track large"><span style={`width:${progress}%`}></span></div>
           </div>
 
@@ -53,6 +57,25 @@ const jsonLd = {
     </div>
   </section>
 
+  {specialVideos.length > 0 && (
+    <section class="book-special-videos">
+      <div class="container">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">Para assistir</p><h2>Comece pelo prólogo ou veja a visão completa.</h2></div>
+          <p class="muted section-intro">Os episódios especiais complementam a sequência capítulo por capítulo sem ocupar lugar na numeração do livro.</p>
+        </div>
+        <div class="special-video-grid">
+          {specialVideos.map((video) => (
+            <article class="special-video-card">
+              <div class="special-video-copy"><p class="eyebrow">{video.eyebrow}</p><h3>{video.title}</h3><p>{video.description}</p><a class="btn btn-secondary" href={video.url} target="_blank" rel="noopener noreferrer" data-track="youtube_especial_aberto" data-track-label={video.title}>{video.label} <span aria-hidden="true">↗</span></a></div>
+              <div class="video-embed"><iframe src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`} title={video.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="book-about-section">
     <div class="container book-about-grid">
       <div><p class="eyebrow">Sobre esta coleção</p><h2>Uma leitura para consultar, não apenas consumir.</h2></div>
@@ -64,7 +87,7 @@ const jsonLd = {
     <div class="container">
       <div class="section-heading split-heading">
         <div><p class="eyebrow">Roteiro do livro</p><h2>Capítulo por capítulo.</h2></div>
-        <p class="muted section-intro">Os capítulos publicados ficam disponíveis para leitura; os próximos aparecem no roteiro para mostrar como a coleção será construída.</p>
+        <p class="muted section-intro">{chapters.length === book.data.totalChapters ? 'A coleção está completa: percorra os nove capítulos na ordem do livro ou escolha o tema que deseja revisar.' : 'Os capítulos publicados ficam disponíveis para leitura; os próximos aparecem no roteiro para mostrar como a coleção será construída.'}</p>
       </div>
 
       <div class="chapter-roadmap">

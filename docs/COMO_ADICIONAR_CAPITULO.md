@@ -58,7 +58,7 @@ Use `applications` para perguntas, exercícios ou pequenos experimentos.
 
 ### Mapa
 
-Use `mapImage`. Se houver arquivo para download, adicione `mapDownloadUrl`. No futuro, `premiumUrl` e `premiumLabel` podem apontar para um benefício de membros.
+Use `mapImage` para a prévia visual exibida na página. Para oferecer o mapa em PDF, salve o arquivo em `public/downloads/mapas/` e informe o caminho em `mapDownloadUrl` (por exemplo, `/downloads/mapas/o-loop-do-habito.pdf`). Quando esse campo existe, o botão **Baixar PDF** aparece automaticamente. No futuro, `premiumUrl` e `premiumLabel` podem apontar para um benefício de membros.
 
 ### Vídeo
 

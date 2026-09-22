@@ -6,6 +6,8 @@ slug: "o-loop-do-habito"
 kicker: "Como comportamentos repetidos passam a funcionar quase no automático"
 takeaway: "Um hábito pode ser observado como um ciclo em que um sinal abre caminho para uma rotina e uma recompensa ajuda o cérebro a reforçar esse padrão."
 summary: "Uma leitura visual do primeiro capítulo de O Poder do Hábito, com o modelo deixa, rotina e recompensa, exemplos de observação e aplicações práticas."
+seoTitle: "O Loop do Hábito: deixa, rotina e recompensa"
+seoDescription: "Resumo visual do capítulo 1 de O Poder do Hábito: entenda o loop do hábito, com deixa, rotina, recompensa e aplicações práticas."
 readingMinutes: 9
 concept:
   eyebrow: "Conceito central"

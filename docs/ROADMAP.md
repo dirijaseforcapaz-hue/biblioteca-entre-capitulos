@@ -1,6 +1,6 @@
 # Roadmap — Biblioteca Entre Capítulos
 
-## Fase atual — v0.2
+## Fase atual — v0.3
 
 - [x] Estrutura Astro
 - [x] Home editorial redesenhada
@@ -21,15 +21,17 @@
 
 ## Fase 2 — O Poder do Hábito completo
 
-- [ ] Capítulo 2 — O Cérebro Ansioso
-- [ ] Capítulo 3 — A Regra de Ouro da Mudança de Hábito
-- [ ] Capítulo 4 — Hábitos Angulares
-- [ ] Capítulo 5 — Starbucks e o Hábito do Sucesso
-- [ ] Capítulo 6 — O Poder de uma Crise
-- [ ] Capítulo 7 — Target
-- [ ] Capítulo 8 — Saddleback Church e Montgomery
-- [ ] Capítulo 9 — A Neurologia do Livre-Arbítrio
-- [ ] URLs reais dos episódios
+- [x] Capítulo 2 — O Cérebro Ansioso
+- [x] Capítulo 3 — A Regra de Ouro da Mudança de Hábito
+- [x] Capítulo 4 — Hábitos Angulares
+- [x] Capítulo 5 — Starbucks e o Hábito do Sucesso
+- [x] Capítulo 6 — O Poder de uma Crise
+- [x] Capítulo 7 — Target
+- [x] Capítulo 8 — Saddleback Church e Montgomery
+- [x] Capítulo 9 — A Neurologia do Livre-Arbítrio
+- [x] URLs reais dos episódios
+- [x] Prólogo e análise completa destacados na página do livro
+- [x] SEO específico por capítulo
 - [ ] Mapas de todos os capítulos
 - [ ] Mapa mestre do livro
 

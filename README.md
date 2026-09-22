@@ -75,3 +75,13 @@ Consulte `docs/COMO_ADICIONAR_CAPITULO.md`. A página é gerada a partir do cont
 ## Regra editorial
 
 O conteúdo deve ser original, analítico e complementar às obras. A Biblioteca Entre Capítulos não deve reproduzir extensamente o texto dos livros nem se apresentar como substituta da leitura original.
+
+
+## v0.3 — O Poder do Hábito completo
+
+- 9 capítulos publicados
+- Vídeo correto em cada capítulo
+- Prólogo destacado na página do livro
+- Análise completa do livro destacada na página do livro
+- SEO específico por capítulo
+- Navegação anterior/próximo em toda a coleção

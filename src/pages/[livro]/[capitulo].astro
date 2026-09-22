@@ -38,7 +38,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: chapter.data.title,
-  description: chapter.data.summary,
+  description: chapter.data.seoDescription ?? chapter.data.summary,
   datePublished: chapter.data.publishedAt.toISOString(),
   dateModified: (chapter.data.updatedAt ?? chapter.data.publishedAt).toISOString(),
   keywords: chapter.data.keywords.join(', '),
@@ -46,8 +46,8 @@ const jsonLd = {
 };
 ---
 <BaseLayout
-  title={`${chapter.data.title} - ${book.data.title}`}
-  description={chapter.data.summary}
+  title={chapter.data.seoTitle ?? `${chapter.data.title} - ${book.data.title}`}
+  description={chapter.data.seoDescription ?? chapter.data.summary}
   type="article"
   progress={true}
   jsonLd={jsonLd}

@@ -23,7 +23,14 @@ const livros = defineCollection({
     totalChapters: z.number().int().positive(),
     chapterOutline: z.array(chapterOutlineItem).default([]),
     affiliateUrl: z.string().url().optional(),
-    affiliateLabel: z.string().default('Ver o livro')
+    affiliateLabel: z.string().default('Ver o livro'),
+    specialVideos: z.array(z.object({
+      eyebrow: z.string(),
+      title: z.string(),
+      description: z.string(),
+      url: z.string().url(),
+      label: z.string().default('Assistir no YouTube')
+    })).default([])
   })
 });
 
@@ -43,6 +50,8 @@ const capitulos = defineCollection({
     kicker: z.string(),
     takeaway: z.string(),
     summary: z.string(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
     readingMinutes: z.number().int().positive().default(8),
     concept: z.object({
       eyebrow: z.string().default('Conceito central'),

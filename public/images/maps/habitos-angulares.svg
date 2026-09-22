@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1800" role="img" aria-labelledby="title desc">
+<title id="title">Mapa visual de Hábitos Angulares</title>
+<desc id="desc">Mapa Entre Capítulos com síntese visual do capítulo 04.</desc>
+<rect width="1600" height="1800" fill="#F8F3E8"/>
+<rect x="48" y="48" width="1504" height="150" rx="32" fill="#1A2433"/>
+<text x="84" y="98" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="2.2" fill="#FFFDF8">MAPA ENTRE CAPÍTULOS  •  O PODER DO HÁBITO  •  CAPÍTULO 04</text>
+<text x="84" y="136" font-family="Georgia,serif" font-size="50" font-weight="700" fill="#FFFDF8">Hábitos Angulares</text>
+<text x="84" y="194" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#506662">Alguns hábitos funcionam como ponto de apoio e iniciam mudanças em cadeia.</text>
+<text x="84" y="246" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="1.8" fill="#1A2433">NÚCLEO DO CAPÍTULO</text>
+<rect x="100" y="250" width="420" height="300" rx="34" fill="#446D58"/><text x="128" y="294" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#DBE6DF">ETAPA 01</text><text x="128" y="344" font-family="Georgia,serif" font-size="38" font-weight="700" fill="#FFFDF8">Hábito angular</text><text x="128" y="410" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#FFFDF8">É um comportamento que</text>
+<text x="128" y="436.1" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#FFFDF8">reorganiza escolhas ao redor</text>
+<text x="128" y="462.2" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#FFFDF8">dele.</text><path d="M530 400 H580" stroke="#1A2433" stroke-width="5" stroke-linecap="round"/><path d="M564 388 L580 400 L564 412" fill="none" stroke="#1A2433" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="590" y="250" width="420" height="300" rx="34" fill="#B1634E"/><text x="618" y="294" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#F4E0D8">ETAPA 02</text><text x="618" y="344" font-family="Georgia,serif" font-size="38" font-weight="700" fill="#FFFDF8">Pequena vitória</text><text x="618" y="410" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#FFFDF8">Resultados visíveis reforçam</text>
+<text x="618" y="436.1" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#FFFDF8">identidade, confiança e</text>
+<text x="618" y="462.2" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#FFFDF8">disciplina.</text><path d="M1020 400 H1070" stroke="#1A2433" stroke-width="5" stroke-linecap="round"/><path d="M1054 388 L1070 400 L1054 412" fill="none" stroke="#1A2433" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="1080" y="250" width="420" height="300" rx="34" fill="#C7A258"/><text x="1108" y="294" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#F5E8BE">ETAPA 03</text><text x="1108" y="344" font-family="Georgia,serif" font-size="38" font-weight="700" fill="#1A2433">Mudança em</text>
+<text x="1108" y="383.52" font-family="Georgia,serif" font-size="38" font-weight="700" fill="#1A2433">cadeia</text><text x="1108" y="410" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#4B4020">Outras rotinas passam a</text>
+<text x="1108" y="436.1" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#4B4020">mudar porque o contexto</text>
+<text x="1108" y="462.2" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#4B4020">pessoal também mudou.</text>
+<rect x="84" y="610" width="1432" height="60" rx="30" fill="#FFF8EA" stroke="#E6DCC7" stroke-width="2"/>
+<text x="800" y="648" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#284536">O EFEITO DOMINÓ</text>
+<rect x="84" y="730" width="470" height="460" rx="30" fill="#FFFDF8" stroke="#D8D0C0" stroke-width="2"/>
+<text x="112" y="775" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#446D58">IDEIAS-CHAVE</text>
+<text x="112" y="820" font-family="Georgia,serif" font-size="30" font-weight="700" fill="#1A2433">Guarde estas lentes</text>
+<circle cx="106" cy="951" r="18" fill="#DBE6DF"/><text x="106" y="956" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#284536">1</text><text x="142" y="947" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#1A2433">Nem todo hábito tem o mesmo alcance.</text><circle cx="106" cy="1046" r="18" fill="#DBE6DF"/><text x="106" y="1051" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#284536">2</text><text x="142" y="1042" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#1A2433">Pequenas vitórias alteram percepção e</text>
+<text x="142" y="1066.65" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#1A2433">prioridades.</text><circle cx="106" cy="1141" r="18" fill="#DBE6DF"/><text x="106" y="1146" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#284536">3</text><text x="142" y="1137" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#1A2433">Mudar um ponto estratégico pode</text>
+<text x="142" y="1161.65" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#1A2433">simplificar outras mudanças.</text>
+<rect x="565" y="730" width="470" height="460" rx="30" fill="#FFFDF8" stroke="#D8D0C0" stroke-width="2"/>
+<text x="593" y="775" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#B1634E">APLICAÇÃO PRÁTICA</text>
+<text x="593" y="820" font-family="Georgia,serif" font-size="30" font-weight="700" fill="#1A2433">Como revisar na prática</text>
+<rect x="584" y="964" width="126" height="36" rx="18" fill="#446D58"/><text x="647" y="987" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#FFFDF8">AÇÃO 01</text><text x="736" y="982" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#667069">Escolha um hábito com potencial</text>
+<text x="736" y="1006.65" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#667069">de irradiar efeitos.</text><rect x="584" y="1050" width="126" height="36" rx="18" fill="#B1634E"/><text x="647" y="1073" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#FFFDF8">AÇÃO 02</text><text x="736" y="1068" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#667069">Procure sinais de pequenas</text>
+<text x="736" y="1092.65" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#667069">vitórias repetidas.</text><rect x="584" y="1136" width="126" height="36" rx="18" fill="#C7A258"/><text x="647" y="1159" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#1A2433">AÇÃO 03</text><text x="736" y="1154" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#667069">Observe que outras decisões</text>
+<text x="736" y="1178.65" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#667069">ficam mais fáceis depois dele.</text>
+<rect x="1046" y="730" width="470" height="460" rx="30" fill="#284536"/>
+<text x="1074" y="775" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#DBE6DF">EXEMPLO DO CAPÍTULO</text>
+<text x="1074" y="820" font-family="Georgia,serif" font-size="29" font-weight="700" fill="#FFFDF8">Um caso para enxergar a</text>
+<text x="1074" y="862.05" font-family="Georgia,serif" font-size="29" font-weight="700" fill="#FFFDF8">ideia</text>
+<text x="1074" y="905" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#DBE6DF">Exercício físico, registrar gastos ou</text>
+<text x="1074" y="931.1" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#DBE6DF">jantar em família podem agir como</text>
+<text x="1074" y="957.2" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#DBE6DF">alavancas que melhoram várias áreas ao</text>
+<text x="1074" y="983.3" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#DBE6DF">mesmo tempo.</text>
+<text x="1074" y="1080" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#F1E7C9">PERGUNTA-CHAVE</text>
+<text x="1074" y="1115" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#FFFDF8">Pergunta-chave: qual hábito, se</text>
+<text x="1074" y="1141.1" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#FFFDF8">fortalecido, tende a puxar outros</text>
+<text x="1074" y="1167.2" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#FFFDF8">junto?</text>
+<line x1="84" y1="1270" x2="1516" y2="1270" stroke="#D8D0C0" stroke-width="2"/>
+<text x="84" y="1312" font-family="Arial,sans-serif" font-size="13" fill="#667069">Biblioteca Entre Capítulos  •  Mapa visual de revisão  •  Conteúdo editorial complementar</text>
+<text x="1516" y="1312" text-anchor="end" font-family="Arial,sans-serif" font-size="13" fill="#667069">clubeentrecapitulos.com.br</text>
+<rect x="84" y="1360" width="1432" height="320" rx="30" fill="#F1EADC" stroke="#E0D6C6" stroke-width="2"/>
+<text x="112" y="1405" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#1A2433">RESUMO EM UMA FRASE</text>
+<text x="800" y="1502" text-anchor="middle" font-family="Georgia,serif" font-size="32" font-weight="700" fill="#1A2433">Pergunta-chave: qual hábito, se fortalecido,</text>
+<text x="800" y="1542.96" text-anchor="middle" font-family="Georgia,serif" font-size="32" font-weight="700" fill="#1A2433">tende a puxar outros junto?</text>
+</svg>
