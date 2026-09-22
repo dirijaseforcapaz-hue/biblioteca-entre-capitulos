@@ -161,7 +161,7 @@ const jsonLd = {
             <p>{chapter.data.mapCaption ?? 'Revise os principais conceitos e conexões do capítulo em uma síntese visual.'}</p>
             <div class="map-actions">
               <a class="btn btn-primary" href={chapter.data.mapImage} target="_blank" rel="noopener" data-track="mapa_aberto" data-track-label={chapter.data.title}>Abrir mapa <span aria-hidden="true">↗</span></a>
-              {chapter.data.mapDownloadUrl && <a class="btn btn-secondary" href={chapter.data.mapDownloadUrl} download data-track="mapa_baixado" data-track-label={chapter.data.title}>Baixar mapa</a>}
+              {chapter.data.mapDownloadUrl && <a class="btn btn-secondary" href={chapter.data.mapDownloadUrl} download={`Mapa-Entre-Capitulos-${chapter.data.slug}.pdf`} data-track="mapa_baixado" data-track-label={chapter.data.title}>Baixar PDF</a>}
               {chapter.data.premiumUrl && <a class="btn btn-secondary" href={chapter.data.premiumUrl} data-track="premium_clicado" data-track-label={chapter.data.title}>{chapter.data.premiumLabel ?? 'Ver versão para membros'}</a>}
             </div>
           </div>
@@ -174,7 +174,12 @@ const jsonLd = {
 
       {youtubeId && (
         <section id="episodio" class="video-panel video-panel-v2" aria-labelledby="episodio-video">
-          <div class="video-copy"><p class="eyebrow">Entre Capítulos Podcast</p><h2 id="episodio-video">Continue no episódio.</h2><p>A análise em vídeo aprofunda as conexões do capítulo e complementa esta leitura visual.</p></div>
+          <div class="video-copy">
+            <p class="eyebrow">Entre Capítulos</p>
+            <h2 id="episodio-video">Continue no episódio.</h2>
+            <p>A análise em vídeo aprofunda as conexões do capítulo e complementa esta leitura visual.</p>
+            <a class="btn video-youtube-link" href={chapter.data.videoUrl} target="_blank" rel="noopener noreferrer" data-track="youtube_aberto" data-track-label={chapter.data.title}>Assistir no YouTube <span aria-hidden="true">↗</span></a>
+          </div>
           <div class="video-embed"><iframe src={`https://www.youtube-nocookie.com/embed/${youtubeId}`} title={chapter.data.videoTitle ?? `Vídeo: ${chapter.data.title}`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
         </section>
       )}

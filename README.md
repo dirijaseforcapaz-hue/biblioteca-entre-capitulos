@@ -1,6 +1,16 @@
 # Biblioteca Entre Capítulos
 
-Versão **0.2.0** do site editorial da Biblioteca Entre Capítulos, criada em Astro para reunir análises, resumos visuais, mapas mentais e episódios de livros, capítulo por capítulo.
+Versão **0.2.3** do site editorial da Biblioteca Entre Capítulos, criada em Astro para reunir análises, resumos visuais, mapas mentais e episódios de livros, capítulo por capítulo.
+
+
+## Atualização v0.2.3
+
+- Logo real do canal integrada ao cabeçalho e rodapé usando o monograma EC, sem a palavra “Podcast”.
+- Episódio do capítulo 1 conectado ao YouTube: `https://youtu.be/EogHSuSDS_Q`.
+- Botão direto “Assistir no YouTube” além do player incorporado.
+- Novo Mapa Entre Capítulos em estilo de jornada visual.
+- Prévia do mapa otimizada em WebP para carregar mais rápido no site.
+- PDF A4 do mapa atualizado para download.
 
 ## O que mudou na v0.2
 
@@ -12,6 +22,7 @@ Versão **0.2.0** do site editorial da Biblioteca Entre Capítulos, criada em As
 - Página de capítulo com navegação interna, tempo de leitura, ideias principais, análise editorial e conexão com o restante do livro.
 - Vídeo deixa de exibir placeholder quando ainda não existe URL.
 - Estrutura para afiliados e mapas premium sem exibir CTAs vazios.
+- Mapas em PDF A4 com download direto por capítulo.
 - SEO aprimorado, sitemap XML real e metadados sociais.
 - Staging protegido contra indexação por padrão.
 - Identidade visual editorial reforçada e melhorias específicas para celular.
