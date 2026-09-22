@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 760" role="img" aria-labelledby="title desc">
+  <title id="title">O Poder do Hábito - coleção Biblioteca Entre Capítulos</title>
+  <desc id="desc">Capa editorial original em tons claros, verde e dourado com um diagrama circular.</desc>
+  <rect width="560" height="760" rx="24" fill="#fffdf8"/>
+  <rect x="0" y="0" width="560" height="26" fill="#17201c"/>
+  <text x="52" y="102" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="3" fill="#315f4b">BIBLIOTECA ENTRE CAPÍTULOS</text>
+  <text x="52" y="214" font-family="Georgia, serif" font-size="64" font-weight="700" fill="#17201c">O PODER</text>
+  <text x="52" y="282" font-family="Georgia, serif" font-size="64" font-weight="700" fill="#17201c">DO HÁBITO</text>
+  <text x="54" y="327" font-family="Arial, sans-serif" font-size="22" fill="#667069">Coleção visual · Charles Duhigg</text>
+  <circle cx="280" cy="500" r="112" fill="none" stroke="#dbe7df" stroke-width="44"/>
+  <path d="M280 388a112 112 0 0 1 101 64" fill="none" stroke="#315f4b" stroke-width="44" stroke-linecap="round"/>
+  <path d="M381 452a112 112 0 0 1-29 122" fill="none" stroke="#a9583f" stroke-width="44" stroke-linecap="round"/>
+  <path d="M352 574a112 112 0 0 1-146 12" fill="none" stroke="#c7a650" stroke-width="44" stroke-linecap="round"/>
+  <text x="280" y="494" text-anchor="middle" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#17201c">DEIXA</text>
+  <text x="280" y="526" text-anchor="middle" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#17201c">ROTINA</text>
+  <text x="280" y="558" text-anchor="middle" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#17201c">RECOMPENSA</text>
+  <text x="52" y="701" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#17201c">GRANDES LIVROS, CAPÍTULO POR CAPÍTULO.</text>
+</svg>

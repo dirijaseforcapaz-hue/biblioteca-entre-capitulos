@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Mapa visual do Loop do Hábito</title>
+  <desc id="desc">Diagrama da deixa, rotina e recompensa com perguntas de observação.</desc>
+  <rect width="1200" height="760" rx="36" fill="#f8f3e8"/>
+  <text x="72" y="88" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="4" fill="#315f4b">MAPA ENTRE CAPÍTULOS · 01</text>
+  <text x="72" y="158" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#17201c">O LOOP DO HÁBITO</text>
+  <text x="72" y="203" font-family="Arial, sans-serif" font-size="24" fill="#667069">Uma lente para observar como um padrão começa, acontece e se reforça.</text>
+
+  <g transform="translate(72 286)">
+    <rect width="300" height="190" rx="26" fill="#315f4b"/>
+    <text x="30" y="50" font-family="Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="2" fill="#dbe7df">01 · SINAL</text>
+    <text x="30" y="105" font-family="Georgia, serif" font-size="45" font-weight="700" fill="#fffdf8">DEIXA</text>
+    <text x="30" y="145" font-family="Arial, sans-serif" font-size="21" fill="#e8f0eb">O que acontece antes?</text>
+  </g>
+  <path d="M386 381h90" stroke="#17201c" stroke-width="6" stroke-linecap="round"/>
+  <path d="m465 365 22 16-22 16" fill="none" stroke="#17201c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(500 286)">
+    <rect width="300" height="190" rx="26" fill="#a9583f"/>
+    <text x="30" y="50" font-family="Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="2" fill="#f6d9ce">02 · AÇÃO</text>
+    <text x="30" y="105" font-family="Georgia, serif" font-size="45" font-weight="700" fill="#fffdf8">ROTINA</text>
+    <text x="30" y="145" font-family="Arial, sans-serif" font-size="21" fill="#fae8e2">O que eu faço?</text>
+  </g>
+  <path d="M814 381h54" stroke="#17201c" stroke-width="6" stroke-linecap="round"/>
+  <path d="m857 365 22 16-22 16" fill="none" stroke="#17201c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(892 286)">
+    <rect width="236" height="190" rx="26" fill="#c7a650"/>
+    <text x="24" y="50" font-family="Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="2" fill="#4b4020">03 · RETORNO</text>
+    <text x="24" y="105" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#17201c">RECOMPENSA</text>
+    <text x="24" y="145" font-family="Arial, sans-serif" font-size="19" fill="#4b4020">O que obtenho?</text>
+  </g>
+
+  <path d="M1010 500c0 110-155 158-428 158S172 610 172 520" fill="none" stroke="#315f4b" stroke-width="5" stroke-dasharray="13 14"/>
+  <path d="m154 539 18-26 19 26" fill="#f8f3e8" stroke="#315f4b" stroke-width="5" stroke-linejoin="round"/>
+  <text x="600" y="626" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#315f4b">REPETIÇÃO + APRENDIZADO → O CAMINHO FICA MAIS FAMILIAR</text>
+
+  <rect x="72" y="682" width="1056" height="2" fill="#d8d0c0"/>
+  <text x="72" y="724" font-family="Arial, sans-serif" font-size="18" fill="#667069">Pergunta de revisão: consigo descrever meu hábito sem usar julgamentos, apenas contexto → comportamento → resultado?</text>
+</svg>

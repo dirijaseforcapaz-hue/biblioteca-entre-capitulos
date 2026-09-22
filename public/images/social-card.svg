@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4f0e6"/>
+  <circle cx="1040" cy="80" r="260" fill="#dbe7df"/>
+  <circle cx="112" cy="610" r="220" fill="#eadfbd"/>
+  <rect x="80" y="80" width="76" height="76" rx="20" fill="#17201c"/>
+  <text x="118" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#fffdf8">EC</text>
+  <text x="80" y="245" font-family="Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="4" fill="#315f4b">BIBLIOTECA ENTRE CAPÍTULOS</text>
+  <text x="80" y="344" font-family="Georgia, serif" font-size="70" font-weight="700" fill="#17201c">Grandes livros,</text>
+  <text x="80" y="424" font-family="Georgia, serif" font-size="70" font-weight="700" fill="#17201c">capítulo por capítulo.</text>
+  <text x="82" y="500" font-family="Arial, sans-serif" font-size="28" fill="#667069">Resumos visuais · mapas · aplicações</text>
+</svg>
