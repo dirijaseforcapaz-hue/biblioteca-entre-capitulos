@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  author: string;
+  description: string;
+  cover: string;
+  slug: string;
+  category: string;
+  chapterCount: number;
+}
+const { title, author, description, cover, slug, category, chapterCount } = Astro.props;
+---
+<article class="card book-card">
+  <div class="book-card-cover">
+    <img src={cover} alt={`Capa editorial da coleção ${title}`} loading="lazy" width="280" height="380" />
+  </div>
+  <div class="book-card-body">
+    <span class="eyebrow">{category}</span>
+    <h3><a href={`/livros/${slug}`}>{title}</a></h3>
+    <div class="book-meta">
+      <span class="badge">{author}</span>
+      <span class="badge">{chapterCount} {chapterCount === 1 ? 'capítulo' : 'capítulos'}</span>
+    </div>
+    <p>{description}</p>
+    <div><a class="btn btn-secondary" href={`/livros/${slug}`} data-track="livro_aberto" data-track-label={title}>Explorar livro →</a></div>
+  </div>
+</article>

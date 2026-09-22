@@ -1,0 +1,58 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ChapterCard from '../../components/ChapterCard.astro';
+
+export async function getStaticPaths() {
+  const books = await getCollection('livros');
+  return books.map((book) => ({ params: { slug: book.data.slug }, props: { book } }));
+}
+
+const { book } = Astro.props;
+const { Content } = await render(book);
+const chapters = (await getCollection('capitulos'))
+  .filter((chapter) => chapter.data.bookSlug === book.data.slug)
+  .sort((a, b) => a.data.number - b.data.number);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  name: book.data.title,
+  author: { '@type': 'Person', name: book.data.author },
+  description: book.data.description
+};
+---
+<BaseLayout title={book.data.title} description={book.data.description} jsonLd={jsonLd}>
+  <section class="book-hero">
+    <div class="container">
+      <div class="breadcrumbs"><a href="/">Início</a><span>›</span><a href="/livros">Livros</a><span>›</span><span>{book.data.title}</span></div>
+      <div class="book-hero-grid">
+        <div class="book-cover-large"><img src={book.data.cover} alt={`Capa editorial da coleção ${book.data.title}`} width="560" height="760" /></div>
+        <div>
+          <p class="eyebrow">{book.data.category}</p>
+          <h1>{book.data.title}</h1>
+          <p class="book-description">{book.data.description}</p>
+          <div class="book-meta">
+            <span class="badge">Autor: {book.data.author}</span>
+            <span class="badge">{chapters.length} {chapters.length === 1 ? 'capítulo disponível' : 'capítulos disponíveis'}</span>
+          </div>
+          <div class="article-body" style="margin-top: 28px;"><Content /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: rgba(255,255,255,.28); border-block:1px solid var(--line);">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">Leitura guiada</p><h2>Capítulos disponíveis</h2></div>
+        <p class="muted">A coleção cresce conforme os episódios e materiais visuais são publicados.</p>
+      </div>
+      {chapters.length ? (
+        <div class="grid-3">
+          {chapters.map((chapter) => <ChapterCard number={chapter.data.number} title={chapter.data.title} summary={chapter.data.summary} bookSlug={chapter.data.bookSlug} slug={chapter.data.slug} />)}
+        </div>
+      ) : <div class="empty-state">Os capítulos desta coleção estão em produção.</div>}
+    </div>
+  </section>
+</BaseLayout>

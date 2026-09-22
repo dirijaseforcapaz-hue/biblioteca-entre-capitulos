@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookCard from '../components/BookCard.astro';
+import ChapterCard from '../components/ChapterCard.astro';
+
+const books = (await getCollection('livros')).sort((a, b) => Number(b.data.featured) - Number(a.data.featured));
+const chapters = (await getCollection('capitulos')).sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+const featuredBook = books.find((book) => book.data.featured) ?? books[0];
+const featuredBookChapters = featuredBook ? chapters.filter((chapter) => chapter.data.bookSlug === featuredBook.data.slug) : [];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Biblioteca Entre Capítulos',
+  url: 'https://bibliotecaentrecapitulos.com.br',
+  description: 'Resumos visuais, mapas mentais e análises de grandes livros, capítulo por capítulo.'
+};
+---
+<BaseLayout
+  title="Biblioteca Entre Capítulos"
+  description="Resumos visuais, mapas mentais e análises de grandes livros, capítulo por capítulo."
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Biblioteca visual de grandes ideias</p>
+        <h1>Entenda grandes livros, capítulo por capítulo.</h1>
+        <p class="lead">Resumos visuais, mapas conceituais e aplicações práticas para transformar episódios do Entre Capítulos em uma biblioteca que você pode consultar a qualquer momento.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/livros" data-track="cta_explorar_biblioteca">Explorar a biblioteca →</a>
+          <a class="btn btn-secondary" href="/o-poder-do-habito/o-loop-do-habito" data-track="cta_capitulo_piloto">Ver capítulo piloto</a>
+        </div>
+        <div class="stats-strip" aria-label="Estatísticas da biblioteca">
+          <div class="stat"><strong>{books.length}</strong><span>{books.length === 1 ? 'livro disponível' : 'livros disponíveis'}</span></div>
+          <div class="stat"><strong>{chapters.length}</strong><span>{chapters.length === 1 ? 'capítulo visual' : 'capítulos visuais'}</span></div>
+          <div class="stat"><strong>1</strong><span>mapa publicado</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="book-stack">
+          <div class="front">
+            <span>Biblioteca Entre Capítulos</span>
+            <strong>Ideias que ficam.</strong>
+            <div class="loop-mini"></div>
+            <small>Leia. Entenda. Conecte.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {featuredBook && (
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Livro em destaque</p>
+            <h2>Comece por uma coleção.</h2>
+          </div>
+          <p class="muted">Cada livro ganha uma página central e, dentro dela, uma sequência de capítulos visuais.</p>
+        </div>
+        <BookCard
+          title={featuredBook.data.title}
+          author={featuredBook.data.author}
+          description={featuredBook.data.description}
+          cover={featuredBook.data.cover}
+          slug={featuredBook.data.slug}
+          category={featuredBook.data.category}
+          chapterCount={featuredBookChapters.length}
+        />
+      </div>
+    </section>
+  )}
+
+  <section class="section" style="background: rgba(255,255,255,.32); border-block: 1px solid var(--line);">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Como a biblioteca funciona</p>
+          <h2>Mais que um resumo.</h2>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="card value-card"><div class="value-icon">01</div><h3>Compreenda</h3><p class="muted">A página reorganiza o capítulo em uma estrutura curta, visual e navegável.</p></article>
+        <article class="card value-card"><div class="value-icon">02</div><h3>Conecte</h3><p class="muted">Diagramas e mapas ajudam a enxergar relações entre conceitos que no texto aparecem separados.</p></article>
+        <article class="card value-card"><div class="value-icon">03</div><h3>Aplique</h3><p class="muted">Cada capítulo termina com perguntas e experimentos simples para levar a ideia além da leitura.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Novos capítulos</p>
+          <h2>Continue explorando.</h2>
+        </div>
+      </div>
+      {chapters.length > 0 ? (
+        <div class="grid-3">
+          {chapters.slice(0, 6).map((chapter) => (
+            <ChapterCard
+              number={chapter.data.number}
+              title={chapter.data.title}
+              summary={chapter.data.summary}
+              bookSlug={chapter.data.bookSlug}
+              slug={chapter.data.slug}
+            />
+          ))}
+        </div>
+      ) : <div class="empty-state">Os primeiros capítulos serão publicados em breve.</div>}
+    </div>
+  </section>
+</BaseLayout>

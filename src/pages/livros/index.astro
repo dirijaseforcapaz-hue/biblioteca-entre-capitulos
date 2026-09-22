@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BookCard from '../../components/BookCard.astro';
+
+const books = await getCollection('livros');
+const chapters = await getCollection('capitulos');
+---
+<BaseLayout title="Livros" description="Explore os livros disponíveis na Biblioteca Entre Capítulos.">
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Acervo</p>
+      <h1>Livros</h1>
+      <p class="lead">Cada coleção reúne análises capítulo a capítulo, mapas visuais e conexões para facilitar revisão e aplicação.</p>
+    </div>
+  </section>
+  <section class="section-compact">
+    <div class="container library-grid">
+      {books.map((book) => (
+        <BookCard
+          title={book.data.title}
+          author={book.data.author}
+          description={book.data.description}
+          cover={book.data.cover}
+          slug={book.data.slug}
+          category={book.data.category}
+          chapterCount={chapters.filter((chapter) => chapter.data.bookSlug === book.data.slug).length}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
