@@ -1,0 +1,156 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const books = (await getCollection('livros')).sort((a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime());
+const chapters = await getCollection('capitulos');
+const bookBySlug = new Map(books.map((book) => [book.data.slug, book]));
+
+const bookStats = books.map((book) => {
+  const bookChapters = chapters
+    .filter((chapter) => chapter.data.bookSlug === book.data.slug)
+    .sort((a, b) => a.data.number - b.data.number);
+
+  return {
+    book,
+    chapters: bookChapters,
+    chapterCount: bookChapters.length,
+    mapCount: bookChapters.filter((chapter) => Boolean(chapter.data.mapImage && chapter.data.mapDownloadUrl)).length
+  };
+});
+
+const totalChapters = chapters.length;
+const totalMaps = chapters.filter((chapter) => Boolean(chapter.data.mapImage && chapter.data.mapDownloadUrl)).length;
+
+// A Home deve apresentar o catálogo, não reproduzir todas as páginas internas.
+// Selecionamos no máximo dois mapas por coleção para manter a vitrine curta.
+const mapShowcase = bookStats.flatMap(({ chapters: bookChapters }) => {
+  const mapped = bookChapters.filter((chapter) => chapter.data.mapImage && chapter.data.mapDownloadUrl);
+  if (mapped.length <= 2) return mapped;
+  return [mapped[0], mapped[Math.floor(mapped.length / 2)]];
+}).slice(0, 4);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Biblioteca Entre Capítulos',
+  url: 'https://bibliotecaentrecapitulos.com.br',
+  description: 'Análises, mapas mentais e episódios de grandes livros, organizados capítulo por capítulo.'
+};
+---
+<BaseLayout
+  title="Biblioteca Entre Capítulos"
+  description="Entenda grandes livros, um capítulo de cada vez. Análises, mapas mentais e episódios organizados em coleções completas."
+  jsonLd={jsonLd}
+>
+  <section class="home-library-hero">
+    <div class="container home-library-hero-grid">
+      <div class="home-library-hero-copy">
+        <p class="eyebrow">Biblioteca Entre Capítulos</p>
+        <h1>Entenda grandes livros,<br /><em>um capítulo de cada vez.</em></h1>
+        <p class="lead">Análises, mapas mentais e episódios organizados em coleções completas para você entender, revisar e aprofundar as ideias que importam.</p>
+        <div class="home-library-hero-action">
+          <a class="btn btn-primary" href="#catalogo" data-track="cta_explorar_catalogo">Explorar a biblioteca <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="home-library-quiet-stat">{books.length} coleções · {totalChapters} capítulos · {totalMaps} mapas</p>
+      </div>
+
+      <div class="home-library-shelf" aria-label="Livros disponíveis na Biblioteca Entre Capítulos">
+        {bookStats.slice(0, 3).map(({ book }, index) => (
+          <a
+            class:list={['home-library-shelf-book', index === 1 && 'is-offset', book.data.accent === 'atomic' && 'is-atomic']}
+            href={`/livros/${book.data.slug}`}
+            aria-label={`Explorar ${book.data.title}`}
+            data-track="livro_aberto"
+            data-track-label={book.data.title}
+          >
+            <img src={book.data.cover} alt={`Capa de ${book.data.title}, de ${book.data.author}`} />
+          </a>
+        ))}
+        <span class="home-library-shelf-line" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalogo" class="section home-library-catalog">
+    <div class="container">
+      <div class="home-library-section-head">
+        <div>
+          <p class="eyebrow">Nossas coleções</p>
+          <h2>Escolha qual estante abrir.</h2>
+        </div>
+        <a class="text-link" href="/livros">Ver catálogo completo <span aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="home-library-book-grid">
+        {bookStats.map(({ book, chapterCount, mapCount }) => (
+          <article class:list={['home-library-book', book.data.accent === 'atomic' && 'is-atomic']}>
+            <a class="home-library-book-cover" href={`/livros/${book.data.slug}`} aria-label={`Explorar ${book.data.title}`}>
+              <img src={book.data.cover} alt={`Capa de ${book.data.title}, de ${book.data.author}`} loading="lazy" />
+            </a>
+            <div class="home-library-book-copy">
+              <div class="home-library-book-status">
+                <span>{book.data.category}</span>
+                <b>{chapterCount === book.data.totalChapters ? 'Coleção completa' : 'Em produção'}</b>
+              </div>
+              <h3><a href={`/livros/${book.data.slug}`}>{book.data.title}</a></h3>
+              <p class="home-library-book-author">{book.data.author}</p>
+              <p class="home-library-book-description">{book.data.description}</p>
+              <div class="home-library-book-meta" aria-label={`Conteúdo disponível em ${book.data.title}`}>
+                <span>{chapterCount} capítulos</span>
+                <span>{mapCount} mapas</span>
+              </div>
+              <a class="btn btn-secondary" href={`/livros/${book.data.slug}`} data-track="livro_aberto" data-track-label={book.data.title}>Explorar livro <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {mapShowcase.length > 0 && (
+    <section id="mapas" class="section home-library-maps">
+      <div class="container">
+        <div class="home-library-section-head">
+          <div>
+            <p class="eyebrow">Mapas em destaque</p>
+            <h2>Volte à ideia em poucos minutos.</h2>
+          </div>
+          <p class="home-library-section-note">Cada mapa também está disponível em PDF dentro do capítulo.</p>
+        </div>
+
+        <div class="home-library-map-grid">
+          {mapShowcase.map((chapter) => {
+            const book = bookBySlug.get(chapter.data.bookSlug);
+            return (
+              <article class="home-library-map-card">
+                <a class="home-library-map-preview" href={`/${chapter.data.bookSlug}/${chapter.data.slug}#mapa`} data-track="mapa_aberto" data-track-label={chapter.data.title}>
+                  <img src={chapter.data.mapImage} alt={chapter.data.mapAlt ?? `Mapa de ${chapter.data.title}`} loading="lazy" />
+                </a>
+                <div class="home-library-map-copy">
+                  <small>{book?.data.title} · Cap. {String(chapter.data.number).padStart(2, '0')}</small>
+                  <strong>{chapter.data.title}</strong>
+                  <a href={`/${chapter.data.bookSlug}/${chapter.data.slug}#mapa`}>Abrir mapa <span aria-hidden="true">→</span></a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="home-library-method">
+    <div class="container home-library-method-inner">
+      <div class="home-library-method-intro">
+        <p class="eyebrow">Como usar a biblioteca</p>
+        <h2>Entenda. Revise. Aprofunde.</h2>
+      </div>
+      <div class="home-library-method-steps">
+        <div><span>01</span><strong>Entenda</strong><p>Leia a análise do capítulo e enxergue a ideia dentro do livro.</p></div>
+        <div><span>02</span><strong>Revise</strong><p>Use o mapa mental para recuperar rapidamente relações e conceitos.</p></div>
+        <div><span>03</span><strong>Aprofunde</strong><p>Continue no episódio quando quiser ouvir a discussão completa.</p></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

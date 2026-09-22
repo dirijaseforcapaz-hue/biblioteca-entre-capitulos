@@ -1,0 +1,16 @@
+{
+  "name": "biblioteca-entre-capitulos",
+  "version": "0.9.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "prebuild": "node scripts/validate-static-assets.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.13.7"
+  }
+}
