@@ -827,3 +827,130 @@ p { margin: 0 0 1.15rem; }
   .chapter-group-meta { justify-content:flex-start; }
   .collection-note { grid-template-columns:1fr; padding:22px; }
 }
+
+/* v0.8.1 - Home catalog-first + biblioteca de mapas */
+.catalog-hero { padding:76px 0 82px; }
+.catalog-hero-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(430px,.92fr); gap:clamp(48px,7vw,86px); align-items:center; }
+.catalog-hero-copy h1 { max-width:760px; }
+.catalog-hero-copy .lead { margin:28px 0 30px; max-width:700px; }
+.catalog-stage { position:relative; padding:28px; border:1px solid var(--line-strong); border-radius:32px; background:rgba(255,253,248,.84); box-shadow:var(--shadow); }
+.catalog-stage::before { content:""; position:absolute; z-index:-1; inset:28px -16px -18px 48px; border-radius:32px; background:var(--sage); transform:rotate(1.4deg); }
+.catalog-stage::after { content:""; position:absolute; z-index:-2; inset:62px 24px -28px -18px; border-radius:32px; background:var(--gold); transform:rotate(-1.8deg); }
+.catalog-stage-books { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.catalog-stage-book { display:grid; grid-template-columns:100px 1fr; gap:16px; align-items:center; padding:14px; border:1px solid var(--line); border-radius:19px; background:rgba(255,255,255,.58); text-decoration:none; }
+.catalog-stage-book:hover { color:inherit; background:#fff; transform:translateY(-2px); }
+.catalog-stage-cover { display:grid; place-items:center; min-height:142px; padding:7px; border-radius:12px; background:var(--sage-soft); }
+.catalog-stage-cover.is-atomic { background:#f6eee1; }
+.catalog-stage-cover img { display:block; width:100%; max-height:142px; object-fit:contain; border-radius:7px; background:#fff; box-shadow:0 8px 18px rgba(24,33,29,.12); }
+.catalog-stage-meta strong { display:block; font-family:Georgia,serif; font-size:1.08rem; line-height:1.12; }
+.catalog-stage-meta span { display:block; margin-top:4px; color:var(--muted); font-size:.78rem; }
+.catalog-stage-meta small { display:block; margin-top:10px; color:var(--sage-dark); font-size:.67rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+.catalog-stage-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; padding-top:18px; border-top:1px solid var(--line); }
+.catalog-stage-stats div { text-align:center; }
+.catalog-stage-stats strong { display:block; font-family:Georgia,serif; font-size:1.55rem; line-height:1; }
+.catalog-stage-stats span { display:block; margin-top:5px; color:var(--muted); font-size:.69rem; font-weight:750; text-transform:uppercase; letter-spacing:.07em; }
+
+.catalog-section { border-top:1px solid var(--line); background:rgba(255,255,255,.22); }
+.catalog-books-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+.catalog-book-card { display:grid; grid-template-columns:180px 1fr; min-height:370px; overflow:hidden; border:1px solid var(--line); border-radius:28px; background:rgba(255,253,248,.82); box-shadow:var(--shadow-soft); }
+.catalog-book-cover { display:grid; place-items:center; padding:22px; background:var(--sage-soft); text-decoration:none; }
+.catalog-book-card.is-atomic .catalog-book-cover { background:#f5eddf; }
+.catalog-book-cover img { width:100%; max-height:285px; object-fit:contain; border-radius:10px; background:#fff; box-shadow:0 14px 28px rgba(24,33,29,.15); transition:transform .18s ease; }
+.catalog-book-cover:hover img { transform:translateY(-3px); }
+.catalog-book-copy { display:flex; flex-direction:column; justify-content:center; padding:30px 28px; }
+.catalog-book-topline { display:flex; justify-content:space-between; gap:10px; align-items:center; }
+.catalog-book-topline span, .catalog-book-topline b { color:var(--muted); font-size:.67rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; }
+.catalog-book-topline b { color:var(--sage-dark); }
+.catalog-book-copy h3 { margin:15px 0 4px; font-size:2rem; }
+.catalog-book-copy h3 a { text-decoration:none; }
+.catalog-book-copy > p:not(.book-author) { color:var(--ink-soft); font-size:.94rem; line-height:1.55; }
+.catalog-book-facts { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 18px; }
+.catalog-book-facts span { padding:6px 10px; border-radius:999px; background:rgba(49,95,75,.07); color:var(--muted); font-size:.72rem; }
+.catalog-book-facts strong { color:var(--ink); }
+
+.library-numbers-section { padding:34px 0; border-block:1px solid var(--line); background:var(--ink); color:#fff; }
+.library-numbers { display:grid; grid-template-columns:repeat(4,1fr); }
+.library-numbers div { padding:8px 28px; text-align:center; border-right:1px solid rgba(255,255,255,.14); }
+.library-numbers div:last-child { border-right:0; }
+.library-numbers strong { display:block; color:var(--gold); font-family:Georgia,serif; font-size:2rem; }
+.library-numbers span { display:block; color:rgba(255,255,255,.72); font-size:.73rem; font-weight:750; letter-spacing:.06em; text-transform:uppercase; }
+
+.home-maps-section { background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(49,95,75,.035)); }
+.home-map-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+.home-map-card { overflow:hidden; border:1px solid var(--line); border-radius:22px; background:var(--white); box-shadow:var(--shadow-soft); }
+.home-map-preview { display:grid; place-items:center; min-height:300px; padding:15px; background:#ebe4d6; text-decoration:none; }
+.home-map-preview img { width:100%; max-height:310px; object-fit:contain; border-radius:10px; box-shadow:0 10px 22px rgba(24,33,29,.10); transition:transform .18s ease; }
+.home-map-preview:hover img { transform:scale(1.012); }
+.home-map-copy { padding:18px; }
+.home-map-copy small { display:block; color:var(--muted); font-size:.65rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+.home-map-copy strong { display:block; min-height:48px; margin-top:5px; font-family:Georgia,serif; font-size:1.05rem; line-height:1.2; }
+.home-map-copy div { display:flex; justify-content:space-between; gap:12px; margin-top:14px; padding-top:12px; border-top:1px solid var(--line); }
+.home-map-copy a { color:var(--sage-dark); font-size:.76rem; font-weight:800; text-decoration:none; }
+.section-cta-center { display:flex; justify-content:center; margin-top:28px; }
+
+.home-analysis-section { padding-top:62px; }
+.home-analysis-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.home-analysis-card { display:grid; grid-template-columns:120px 1fr; gap:24px; align-items:center; padding:24px; border:1px solid var(--line); border-radius:24px; background:rgba(255,253,248,.76); }
+.home-analysis-cover { display:grid; place-items:center; min-height:170px; padding:10px; border-radius:14px; background:var(--sage-soft); }
+.home-analysis-cover.is-atomic { background:#f5eddf; }
+.home-analysis-cover img { width:100%; max-height:165px; object-fit:contain; border-radius:7px; background:#fff; }
+.home-analysis-card small { color:var(--muted); font-size:.7rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em; }
+.home-analysis-card h3 { margin:7px 0 10px; font-size:1.65rem; }
+.home-analysis-card p { color:var(--ink-soft); font-size:.9rem; line-height:1.55; }
+
+.book-maps-library { border-top:1px solid var(--line); background:rgba(255,255,255,.25); }
+.book-map-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+.book-map-card { overflow:hidden; border:1px solid var(--line); border-radius:22px; background:var(--white); box-shadow:var(--shadow-soft); }
+.book-map-preview { display:grid; place-items:center; min-height:285px; padding:14px; background:#ebe4d6; text-decoration:none; }
+.book-map-preview img { width:100%; max-height:295px; object-fit:contain; border-radius:9px; box-shadow:0 9px 20px rgba(24,33,29,.1); }
+.book-map-copy { padding:17px; }
+.book-map-copy small { display:block; color:var(--rust); font-size:.67rem; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+.book-map-copy strong { display:block; min-height:50px; margin-top:5px; font-family:Georgia,serif; font-size:1rem; line-height:1.2; }
+.book-map-copy div { display:flex; justify-content:space-between; gap:10px; margin-top:13px; padding-top:11px; border-top:1px solid var(--line); }
+.book-map-copy a { color:var(--sage-dark); font-size:.74rem; font-weight:850; text-decoration:none; }
+
+/* Evita recortes em capas reais */
+.book-card-cover img { object-fit:contain; background:#fff; }
+.book-cover-large img { object-fit:contain; background:#fff; }
+
+@media (max-width: 1040px) {
+  .catalog-hero-grid { grid-template-columns:1fr; }
+  .catalog-stage { width:min(760px,100%); }
+  .catalog-books-grid { grid-template-columns:1fr; }
+  .home-map-grid, .book-map-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+
+@media (max-width: 760px) {
+  .catalog-hero { padding:54px 0 66px; }
+  .catalog-stage { padding:18px; }
+  .catalog-stage-books { grid-template-columns:1fr; }
+  .catalog-stage-book { grid-template-columns:82px 1fr; }
+  .catalog-stage-cover { min-height:116px; }
+  .catalog-stage-cover img { max-height:116px; }
+  .catalog-book-card { grid-template-columns:112px 1fr; min-height:260px; }
+  .catalog-book-cover { padding:12px; }
+  .catalog-book-cover img { max-height:210px; }
+  .catalog-book-copy { padding:20px 16px; }
+  .catalog-book-copy h3 { font-size:1.5rem; }
+  .catalog-book-copy > p:not(.book-author) { display:none; }
+  .catalog-book-topline { display:block; }
+  .catalog-book-topline b { display:block; margin-top:5px; }
+  .catalog-book-facts { gap:5px; }
+  .library-numbers { grid-template-columns:repeat(2,1fr); gap:0; }
+  .library-numbers div { border-right:0; border-bottom:1px solid rgba(255,255,255,.12); }
+  .home-map-grid, .book-map-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .home-map-preview, .book-map-preview { min-height:230px; }
+  .home-analysis-grid { grid-template-columns:1fr; }
+}
+
+@media (max-width: 520px) {
+  .catalog-stage-stats { gap:4px; }
+  .catalog-stage-stats span { font-size:.6rem; }
+  .catalog-book-card { grid-template-columns:96px 1fr; }
+  .catalog-book-facts span:nth-child(3) { display:none; }
+  .home-map-grid, .book-map-grid { grid-template-columns:1fr; }
+  .home-map-preview, .book-map-preview { min-height:320px; }
+  .home-analysis-card { grid-template-columns:86px 1fr; gap:16px; padding:18px; }
+  .home-analysis-cover { min-height:130px; }
+  .home-analysis-cover img { max-height:125px; }
+}

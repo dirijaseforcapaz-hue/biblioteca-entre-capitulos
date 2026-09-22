@@ -6,15 +6,16 @@ interface Props {
   bookSlug: string;
   slug: string;
   hasMap?: boolean;
+  bookTitle?: string;
 }
-const { number, title, summary, bookSlug, slug, hasMap = false } = Astro.props;
+const { number, title, summary, bookSlug, slug, hasMap = false, bookTitle } = Astro.props;
 ---
 <article class="card chapter-card" data-number={String(number).padStart(2, '0')}>
-  <span class="chapter-number">Capítulo {String(number).padStart(2, '0')}</span>
+  <span class="chapter-number">{bookTitle ? `${bookTitle} · Capítulo ${String(number).padStart(2, '0')}` : `Capítulo ${String(number).padStart(2, '0')}`}</span>
   <h3><a href={`/${bookSlug}/${slug}`}>{title}</a></h3>
   <p>{summary}</p>
   <div class="chapter-meta">
-    <span class="chapter-meta-pill">Resumo visual</span>
+    <span class="chapter-meta-pill">Análise</span>
     {hasMap && <span class="chapter-meta-pill is-map">Mapa mental</span>}
   </div>
   <a href={`/${bookSlug}/${slug}`} data-track="capitulo_aberto" data-track-label={title}>Explorar capítulo →</a>

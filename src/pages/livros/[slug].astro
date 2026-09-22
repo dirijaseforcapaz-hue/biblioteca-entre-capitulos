@@ -17,6 +17,7 @@ const firstChapter = chapters[0];
 const progress = Math.min(100, Math.round((chapters.length / book.data.totalChapters) * 100));
 const hasGroupedRoadmap = book.data.chapterGroups.length > 0;
 const frameworkItems = book.data.framework?.items ?? [];
+const mappedChapters = chapters.filter((chapter) => Boolean(chapter.data.mapImage && chapter.data.mapDownloadUrl));
 const collectionStatus = chapters.length === book.data.totalChapters
   ? book.data.status === 'em-producao'
     ? { label: 'Análises publicadas', detail: `${chapters.length} de ${book.data.totalChapters} capítulos` }
@@ -204,6 +205,34 @@ const jsonLd = {
       )}
     </div>
   </section>
+
+  {mappedChapters.length > 0 && (
+    <section id="mapas" class="section book-maps-library">
+      <div class="container">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">Mapas Entre Capítulos</p><h2>{mappedChapters.length} mapas para revisar a coleção.</h2></div>
+          <p class="muted section-intro">Abra o mapa no navegador ou baixe o PDF de cada capítulo. Os arquivos ficam disponíveis sem precisar sair da página do livro.</p>
+        </div>
+        <div class="book-map-grid">
+          {mappedChapters.map((chapter) => (
+            <article class="book-map-card">
+              <a class="book-map-preview" href={`/${chapter.data.bookSlug}/${chapter.data.slug}#mapa`} data-track="mapa_aberto" data-track-label={chapter.data.title}>
+                <img src={chapter.data.mapImage} alt={chapter.data.mapAlt ?? `Mapa de ${chapter.data.title}`} loading="lazy" />
+              </a>
+              <div class="book-map-copy">
+                <small>Capítulo {String(chapter.data.number).padStart(2, '0')}</small>
+                <strong>{chapter.data.title}</strong>
+                <div>
+                  <a href={`/${chapter.data.bookSlug}/${chapter.data.slug}#mapa`}>Abrir mapa</a>
+                  <a href={chapter.data.mapDownloadUrl} download={`Mapa-Entre-Capitulos-${chapter.data.slug}.pdf`} data-track="mapa_baixado" data-track-label={chapter.data.title}>Baixar PDF ↓</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="book-method-section">
     <div class="container book-method-grid">
