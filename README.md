@@ -1,6 +1,14 @@
 # Biblioteca Entre Capítulos
 
-Versão **0.2.3** do site editorial da Biblioteca Entre Capítulos, criada em Astro para reunir análises, resumos visuais, mapas mentais e episódios de livros, capítulo por capítulo.
+Versão **0.6.0** do site editorial da Biblioteca Entre Capítulos, criada em Astro para reunir análises, resumos visuais, mapas mentais e episódios de livros, capítulo por capítulo.
+
+
+## Atualização v0.6.0
+
+- 20 páginas de capítulo de **Hábitos Atômicos** publicadas a partir do fichamento editorial baseado na edição brasileira enviada ao projeto.
+- Cada página inclui conceito central, ideias-chave, exemplos, análise, aplicações, conexão com o livro e metadados SEO.
+- A coleção continua com status **em produção** porque mapas mentais e episódios ainda serão incorporados nas próximas etapas.
+- A página do livro diferencia “análises publicadas” de “coleção completa” enquanto os recursos complementares ainda estão sendo produzidos.
 
 
 ## Atualização v0.2.3
@@ -85,3 +93,8 @@ O conteúdo deve ser original, analítico e complementar às obras. A Biblioteca
 - Análise completa do livro destacada na página do livro
 - SEO específico por capítulo
 - Navegação anterior/próximo em toda a coleção
+
+
+## v0.5.0
+
+Adiciona a página principal de Hábitos Atômicos com organização pelas Quatro Leis da Mudança de Comportamento.

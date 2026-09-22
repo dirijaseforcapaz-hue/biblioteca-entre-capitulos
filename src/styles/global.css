@@ -739,3 +739,91 @@ p { margin: 0 0 1.15rem; }
 .special-video-copy p:not(.eyebrow) { color:var(--ink-soft); }
 .special-video-card .video-embed { border-radius:0; }
 @media (max-width:900px){ .special-video-grid { grid-template-columns:1fr; } }
+
+/* v0.5 — Hábitos Atômicos: página de coleção por leis */
+.book-hero-atomic {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(206,151,56,.16), transparent 28%),
+    linear-gradient(180deg, rgba(255,255,255,.18), transparent);
+}
+.book-hero-atomic::after {
+  content:"";
+  position:absolute;
+  width:520px;
+  height:520px;
+  right:-180px;
+  bottom:-300px;
+  border:1px solid rgba(199,166,80,.24);
+  border-radius:50%;
+  box-shadow:0 0 0 62px rgba(199,166,80,.045), 0 0 0 124px rgba(199,166,80,.03);
+  pointer-events:none;
+}
+.book-hero-atomic .book-cover-large { background:#fff; }
+.book-hero-atomic .book-cover-large img { aspect-ratio:auto; object-fit:contain; background:#fff; }
+.book-hero-atomic .cover-shadow { background:#c99338; }
+.book-hero-atomic .eyebrow { color:#9b681f; }
+.book-hero-atomic .book-progress-panel { border-color:rgba(199,151,62,.34); background:rgba(255,250,240,.62); }
+.book-card-atomic .book-card-cover { background:#f8f1e6; }
+.book-card-atomic .book-card-cover img { aspect-ratio:auto; object-fit:contain; background:#fff; }
+.book-card-atomic .status-dot i { background:#c99338; }
+
+.book-framework-section { padding:88px 0 92px; border-block:1px solid var(--line); background:#efe8da; }
+.book-framework-section h2 { max-width:680px; }
+.framework-flow { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin-top:12px; }
+.framework-card { position:relative; min-height:310px; padding:28px 24px 24px; border:1px solid rgba(24,33,29,.1); border-radius:24px; background:var(--white); box-shadow:0 12px 36px rgba(24,33,29,.05); }
+.framework-card:nth-child(1) { border-top:5px solid #315f4b; }
+.framework-card:nth-child(2) { border-top:5px solid #a9583f; }
+.framework-card:nth-child(3) { border-top:5px solid #c7a650; }
+.framework-card:nth-child(4) { border-top:5px solid #234637; }
+.framework-number { display:inline-grid; place-items:center; width:42px; height:42px; border-radius:50%; background:var(--ink); color:var(--white); font-family:Georgia,serif; font-size:1rem; }
+.framework-stage { display:block; margin-top:24px; color:var(--muted); font-size:.72rem; font-weight:850; letter-spacing:.1em; text-transform:uppercase; }
+.framework-card h3 { margin:10px 0 24px; font-size:clamp(1.65rem,2.6vw,2.2rem); }
+.framework-inverse { margin-top:auto; padding-top:18px; border-top:1px solid var(--line); }
+.framework-inverse small { display:block; color:var(--muted); font-size:.68rem; font-weight:750; text-transform:uppercase; letter-spacing:.06em; }
+.framework-inverse strong { display:block; margin-top:6px; color:var(--ink-soft); font-size:.95rem; }
+.framework-arrow { position:absolute; z-index:3; right:-22px; top:50%; transform:translateY(-50%); display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:var(--ink); color:#fff; font-size:.9rem; box-shadow:0 4px 12px rgba(24,33,29,.12); }
+.framework-legend { display:grid; grid-template-columns:1fr 1fr; margin-top:18px; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:rgba(255,255,255,.45); }
+.framework-legend span { padding:14px 18px; color:var(--muted); font-size:.82rem; text-align:center; }
+.framework-legend span + span { border-left:1px solid var(--line); }
+.framework-legend b { color:var(--ink); }
+.book-framework-atomic .eyebrow { color:#9b681f; }
+
+.chapter-roadmap-grouped { background:linear-gradient(180deg, transparent, rgba(255,255,255,.18)); }
+.chapter-groups { display:grid; gap:52px; margin-top:38px; }
+.chapter-group { padding:0 0 6px; }
+.chapter-group-head { display:flex; align-items:end; justify-content:space-between; gap:26px; margin-bottom:12px; }
+.chapter-group-head h3 { max-width:860px; margin:6px 0 0; font-size:clamp(2rem,4vw,3.1rem); }
+.chapter-group-description { max-width:900px; margin:0 0 20px; color:var(--muted); font-size:1rem; line-height:1.65; }
+.chapter-group-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+.chapter-group-meta span, .chapter-group-meta b { display:inline-flex; align-items:center; min-height:34px; padding:0 12px; border-radius:999px; font-size:.72rem; font-weight:850; letter-spacing:.06em; text-transform:uppercase; }
+.chapter-group-meta span { background:rgba(199,166,80,.18); color:#775a16; }
+.chapter-group-meta b { background:rgba(49,95,75,.08); color:var(--sage-dark); }
+.chapter-group .chapter-roadmap { border-top:1px solid var(--line-strong); }
+.chapter-group .roadmap-item.is-upcoming { opacity:.78; }
+.chapter-group .roadmap-item.is-upcoming .roadmap-number { color:#a86d28; }
+.chapter-group .roadmap-item.is-upcoming .roadmap-main small { color:#8c7a61; }
+
+.collection-note { display:grid; grid-template-columns:64px 1fr; gap:20px; align-items:start; margin:34px 0 46px; padding:24px 26px; border:1px solid var(--line); border-radius:22px; background:rgba(255,253,248,.72); }
+.collection-note-mark { display:grid; place-items:center; width:52px; height:52px; border-radius:16px; background:var(--ink); color:#fff; font-family:Georgia,serif; font-size:1.2rem; box-shadow:5px 5px 0 var(--gold); }
+.collection-note h3 { margin:5px 0 7px; font-size:1.7rem; }
+.collection-note p:not(.eyebrow) { margin:0; max-width:980px; color:var(--muted); }
+.collection-note-closing { margin-top:52px; background:#eee7d9; }
+
+@media (max-width: 980px) {
+  .framework-flow { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .framework-arrow { display:none; }
+}
+
+@media (max-width: 700px) {
+  .book-framework-section { padding:64px 0; }
+  .framework-flow { grid-template-columns:1fr; }
+  .framework-card { min-height:auto; }
+  .framework-legend { grid-template-columns:1fr; }
+  .framework-legend span + span { border-left:0; border-top:1px solid var(--line); }
+  .chapter-groups { gap:42px; }
+  .chapter-group-head { display:grid; align-items:start; }
+  .chapter-group-meta { justify-content:flex-start; }
+  .collection-note { grid-template-columns:1fr; padding:22px; }
+}

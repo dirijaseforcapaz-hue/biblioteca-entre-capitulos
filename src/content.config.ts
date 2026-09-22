@@ -6,6 +6,21 @@ const chapterOutlineItem = z.object({
   title: z.string()
 });
 
+const chapterGroup = z.object({
+  eyebrow: z.string(),
+  title: z.string(),
+  description: z.string().optional(),
+  stage: z.string().optional(),
+  numbers: z.array(z.number().int().positive()).min(1)
+});
+
+const frameworkItem = z.object({
+  number: z.number().int().positive(),
+  stage: z.string(),
+  law: z.string(),
+  inverse: z.string()
+});
+
 const livros = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/livros' }),
   schema: z.object({
@@ -22,6 +37,23 @@ const livros = defineCollection({
     accent: z.string().default('sage'),
     totalChapters: z.number().int().positive(),
     chapterOutline: z.array(chapterOutlineItem).default([]),
+    chapterGroups: z.array(chapterGroup).default([]),
+    framework: z.object({
+      eyebrow: z.string().default('Sistema do livro'),
+      title: z.string(),
+      description: z.string(),
+      items: z.array(frameworkItem).length(4)
+    }).optional(),
+    openingNote: z.object({
+      eyebrow: z.string(),
+      title: z.string(),
+      description: z.string()
+    }).optional(),
+    closingNote: z.object({
+      eyebrow: z.string(),
+      title: z.string(),
+      description: z.string()
+    }).optional(),
     affiliateUrl: z.string().url().optional(),
     affiliateLabel: z.string().default('Ver o livro'),
     specialVideos: z.array(z.object({

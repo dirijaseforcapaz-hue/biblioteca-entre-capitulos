@@ -30,6 +30,7 @@ const chapters = await getCollection('capitulos');
           chapterCount={chapters.filter((chapter) => chapter.data.bookSlug === book.data.slug).length}
           totalChapters={book.data.totalChapters}
           status={book.data.status}
+          accent={book.data.accent}
         />
       ))}
     </div>

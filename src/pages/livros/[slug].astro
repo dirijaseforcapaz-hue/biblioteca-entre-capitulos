@@ -15,6 +15,16 @@ const chapters = (await getCollection('capitulos'))
 const byNumber = new Map(chapters.map((chapter) => [chapter.data.number, chapter]));
 const firstChapter = chapters[0];
 const progress = Math.min(100, Math.round((chapters.length / book.data.totalChapters) * 100));
+const hasGroupedRoadmap = book.data.chapterGroups.length > 0;
+const frameworkItems = book.data.framework?.items ?? [];
+const collectionStatus = chapters.length === book.data.totalChapters
+  ? book.data.status === 'em-producao'
+    ? { label: 'Análises publicadas', detail: `${chapters.length} de ${book.data.totalChapters} capítulos` }
+    : { label: 'Coleção completa', detail: `${chapters.length} de ${book.data.totalChapters} capítulos` }
+  : chapters.length === 0
+    ? { label: 'Coleção em preparação', detail: `${book.data.totalChapters} capítulos mapeados` }
+    : { label: 'Coleção em andamento', detail: `${chapters.length} de ${book.data.totalChapters} capítulos` };
+
 const specialVideos = book.data.specialVideos.map((video) => ({
   ...video,
   youtubeId: video.url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/)?.[1]
@@ -29,7 +39,7 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={book.data.title} description={book.data.description} jsonLd={jsonLd}>
-  <section class="book-hero book-hero-v2">
+  <section class:list={['book-hero', 'book-hero-v2', book.data.accent === 'atomic' && 'book-hero-atomic']}>
     <div class="container">
       <div class="breadcrumbs"><a href="/">Início</a><span>›</span><a href="/livros">Livros</a><span>›</span><span>{book.data.title}</span></div>
       <div class="book-hero-grid">
@@ -44,18 +54,48 @@ const jsonLd = {
           <p class="book-description">{book.data.description}</p>
 
           <div class="book-progress-panel">
-            <div class="book-progress-top"><span>{chapters.length === book.data.totalChapters ? 'Coleção completa' : 'Coleção em andamento'}</span><strong>{chapters.length} de {book.data.totalChapters} capítulos</strong></div>
-            <div class="collection-progress-track large"><span style={`width:${progress}%`}></span></div>
+            <div class="book-progress-top"><span>{collectionStatus.label}</span><strong>{collectionStatus.detail}</strong></div>
+            {chapters.length > 0 && <div class="collection-progress-track large"><span style={`width:${progress}%`}></span></div>}
           </div>
 
           <div class="book-hero-actions">
-            {firstChapter && <a class="btn btn-primary" href={`/${firstChapter.data.bookSlug}/${firstChapter.data.slug}`} data-track="iniciar_colecao" data-track-label={book.data.title}>Começar a leitura <span aria-hidden="true">→</span></a>}
+            {firstChapter ? (
+              <a class="btn btn-primary" href={`/${firstChapter.data.bookSlug}/${firstChapter.data.slug}`} data-track="iniciar_colecao" data-track-label={book.data.title}>Começar a leitura <span aria-hidden="true">→</span></a>
+            ) : (
+              <a class="btn btn-primary" href="#roteiro" data-track="ver_roteiro" data-track-label={book.data.title}>Explorar a estrutura <span aria-hidden="true">↓</span></a>
+            )}
             {book.data.affiliateUrl && <a class="btn btn-secondary" href={book.data.affiliateUrl} target="_blank" rel="sponsored noopener" data-track="amazon_clicado" data-track-label={book.data.title}>{book.data.affiliateLabel} ↗</a>}
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  {book.data.framework && (
+    <section class:list={['book-framework-section', book.data.accent === 'atomic' && 'book-framework-atomic']}>
+      <div class="container">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">{book.data.framework.eyebrow}</p><h2>{book.data.framework.title}</h2></div>
+          <p class="muted section-intro">{book.data.framework.description}</p>
+        </div>
+        <div class="framework-flow" aria-label="As quatro leis da mudança de comportamento">
+          {frameworkItems.map((item, index) => (
+            <article class="framework-card">
+              <span class="framework-number">0{item.number}</span>
+              <span class="framework-stage">{item.stage}</span>
+              <h3>{item.law}</h3>
+              <div class="framework-inverse"><small>Para dificultar um mau hábito</small><strong>{item.inverse}</strong></div>
+              {index < frameworkItems.length - 1 && <span class="framework-arrow" aria-hidden="true">→</span>}
+            </article>
+          ))}
+        </div>
+        <div class="framework-legend">
+          <span><b>Problema</b> · estímulo + desejo</span>
+          <span><b>Solução</b> · resposta + recompensa</span>
+        </div>
+      </div>
+    </section>
+  )}
 
   {specialVideos.length > 0 && (
     <section class="book-special-videos">
@@ -78,36 +118,90 @@ const jsonLd = {
 
   <section class="book-about-section">
     <div class="container book-about-grid">
-      <div><p class="eyebrow">Sobre esta coleção</p><h2>Uma leitura para consultar, não apenas consumir.</h2></div>
+      <div><p class="eyebrow">Sobre esta coleção</p><h2>{hasGroupedRoadmap ? 'Um sistema para enxergar o livro inteiro.' : 'Uma leitura para consultar, não apenas consumir.'}</h2></div>
       <div class="article-body book-intro"><Content /></div>
     </div>
   </section>
 
-  <section class="section chapter-roadmap-section">
+  <section id="roteiro" class:list={['section', 'chapter-roadmap-section', hasGroupedRoadmap && 'chapter-roadmap-grouped']}>
     <div class="container">
       <div class="section-heading split-heading">
-        <div><p class="eyebrow">Roteiro do livro</p><h2>Capítulo por capítulo.</h2></div>
-        <p class="muted section-intro">{chapters.length === book.data.totalChapters ? 'A coleção está completa: percorra os nove capítulos na ordem do livro ou escolha o tema que deseja revisar.' : 'Os capítulos publicados ficam disponíveis para leitura; os próximos aparecem no roteiro para mostrar como a coleção será construída.'}</p>
+        <div><p class="eyebrow">Roteiro do livro</p><h2>{hasGroupedRoadmap ? '20 capítulos. Um único sistema.' : 'Capítulo por capítulo.'}</h2></div>
+        <p class="muted section-intro">{chapters.length === book.data.totalChapters ? 'A coleção está completa: percorra os capítulos na ordem do livro ou escolha o tema que deseja revisar.' : hasGroupedRoadmap ? 'A estrutura completa já está organizada. À medida que as análises forem publicadas, cada capítulo passa a abrir sua própria experiência de estudo.' : 'Os capítulos publicados ficam disponíveis para leitura; os próximos aparecem no roteiro para mostrar como a coleção será construída.'}</p>
       </div>
 
-      <div class="chapter-roadmap">
-        {book.data.chapterOutline.map((item) => {
-          const chapter = byNumber.get(item.number);
-          return chapter ? (
-            <a class="roadmap-item is-published" href={`/${chapter.data.bookSlug}/${chapter.data.slug}`} data-track="capitulo_aberto" data-track-label={chapter.data.title}>
-              <span class="roadmap-number">{String(item.number).padStart(2, '0')}</span>
-              <span class="roadmap-main"><small>Disponível</small><strong>{item.title}</strong><span>{chapter.data.kicker}</span></span>
-              <span class="roadmap-action">Ler <b aria-hidden="true">→</b></span>
-            </a>
-          ) : (
-            <div class="roadmap-item is-upcoming">
-              <span class="roadmap-number">{String(item.number).padStart(2, '0')}</span>
-              <span class="roadmap-main"><small>Em preparação</small><strong>{item.title}</strong></span>
-              <span class="roadmap-action">Em breve</span>
-            </div>
-          );
-        })}
-      </div>
+      {book.data.openingNote && (
+        <aside class="collection-note collection-note-opening">
+          <span class="collection-note-mark">↳</span>
+          <div><p class="eyebrow">{book.data.openingNote.eyebrow}</p><h3>{book.data.openingNote.title}</h3><p>{book.data.openingNote.description}</p></div>
+        </aside>
+      )}
+
+      {hasGroupedRoadmap ? (
+        <div class="chapter-groups">
+          {book.data.chapterGroups.map((group, groupIndex) => (
+            <section class="chapter-group" aria-labelledby={`grupo-${groupIndex}`}>
+              <header class="chapter-group-head">
+                <div>
+                  <p class="eyebrow">{group.eyebrow}</p>
+                  <h3 id={`grupo-${groupIndex}`}>{group.title}</h3>
+                </div>
+                <div class="chapter-group-meta">
+                  {group.stage && <span>{group.stage}</span>}
+                  <b>{group.numbers.length} {group.numbers.length === 1 ? 'capítulo' : 'capítulos'}</b>
+                </div>
+              </header>
+              {group.description && <p class="chapter-group-description">{group.description}</p>}
+              <div class="chapter-roadmap">
+                {group.numbers.map((number) => {
+                  const item = book.data.chapterOutline.find((outline) => outline.number === number);
+                  if (!item) return null;
+                  const chapter = byNumber.get(number);
+                  return chapter ? (
+                    <a class="roadmap-item is-published" href={`/${chapter.data.bookSlug}/${chapter.data.slug}`} data-track="capitulo_aberto" data-track-label={chapter.data.title}>
+                      <span class="roadmap-number">{String(item.number).padStart(2, '0')}</span>
+                      <span class="roadmap-main"><small>Disponível</small><strong>{item.title}</strong><span>{chapter.data.kicker}</span></span>
+                      <span class="roadmap-action">Ler <b aria-hidden="true">→</b></span>
+                    </a>
+                  ) : (
+                    <div class="roadmap-item is-upcoming">
+                      <span class="roadmap-number">{String(item.number).padStart(2, '0')}</span>
+                      <span class="roadmap-main"><small>Em preparação</small><strong>{item.title}</strong></span>
+                      <span class="roadmap-action">Em breve</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <div class="chapter-roadmap">
+          {book.data.chapterOutline.map((item) => {
+            const chapter = byNumber.get(item.number);
+            return chapter ? (
+              <a class="roadmap-item is-published" href={`/${chapter.data.bookSlug}/${chapter.data.slug}`} data-track="capitulo_aberto" data-track-label={chapter.data.title}>
+                <span class="roadmap-number">{String(item.number).padStart(2, '0')}</span>
+                <span class="roadmap-main"><small>Disponível</small><strong>{item.title}</strong><span>{chapter.data.kicker}</span></span>
+                <span class="roadmap-action">Ler <b aria-hidden="true">→</b></span>
+              </a>
+            ) : (
+              <div class="roadmap-item is-upcoming">
+                <span class="roadmap-number">{String(item.number).padStart(2, '0')}</span>
+                <span class="roadmap-main"><small>Em preparação</small><strong>{item.title}</strong></span>
+                <span class="roadmap-action">Em breve</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {book.data.closingNote && (
+        <aside class="collection-note collection-note-closing">
+          <span class="collection-note-mark">✓</span>
+          <div><p class="eyebrow">{book.data.closingNote.eyebrow}</p><h3>{book.data.closingNote.title}</h3><p>{book.data.closingNote.description}</p></div>
+        </aside>
+      )}
     </div>
   </section>
 
